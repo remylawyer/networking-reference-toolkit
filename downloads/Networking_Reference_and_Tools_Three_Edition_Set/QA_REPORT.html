@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en-AU"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quality assurance report and limitations — Networking Reference &amp; Tools</title>
+<meta name="description" content="Quality assurance report and limitations">
+<link rel="canonical" href="https://remy-l-95.github.io/networking-reference-toolkit/QA_REPORT.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2317677c'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23d9edf1' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23d9a441'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#123448">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Quality assurance report and limitations — Networking Reference &amp; Tools">
+<meta property="og:description" content="Quality assurance report and limitations">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--brand:#17677c;--brand-dark:#124657;--ink:#243746;--muted:#5c6b76;
+--line:#d7e1e8;--paper:#fff;--soft:#f4f8fa;--soft-blue:#eaf4f7;--accent:#d9a441}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0 auto;max-width:860px;width:calc(100% - 40px);padding:26px 0 64px;
+ font:400 16.5px/1.68 Inter,"Segoe UI",Roboto,system-ui,Arial,sans-serif;color:var(--ink);background:var(--soft)}
+header{background:linear-gradient(125deg,#123448 0%,#17677c 58%,#2b8490 100%);
+ border-radius:18px;padding:30px 32px;color:#fff;margin-bottom:26px;box-shadow:0 10px 30px rgba(22,43,59,.07)}
+header .kick{font-size:.74rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+ color:#d9edf1;margin:0 0 12px}
+header h1{margin:0;font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.15;letter-spacing:-.03em;text-wrap:balance}
+header .sub{margin:12px 0 0;color:#e2f1f4;font-size:.95rem}
+main{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:30px 34px;
+ box-shadow:0 10px 30px rgba(22,43,59,.07)}
+h2{color:var(--brand-dark);font-size:1.24rem;margin:2em 0 .6em;letter-spacing:-.015em;
+ padding-bottom:6px;border-bottom:1px solid var(--line);text-wrap:balance}
+h3{font-size:1.02rem;color:var(--brand);margin:1.6em 0 .5em}
+p,li{margin:.7em 0;text-wrap:pretty}
+a{color:var(--brand);text-underline-offset:3px}
+code{font-family:ui-monospace,Consolas,monospace;background:var(--soft-blue);
+ padding:.1em .3em;border-radius:4px;font-size:.88em}
+pre{background:#132735;color:#edf7fa;padding:16px 18px;border-radius:12px;overflow-x:auto;font-size:.9rem}
+pre code{background:none;padding:0;color:inherit}
+ul,ol{padding-left:1.5em} li{margin:.35em 0}
+blockquote{margin:1.1rem 0;padding:13px 18px;border-left:4px solid var(--accent);
+ border-radius:0 10px 10px 0;background:#fff9ec;color:#5d4a26}
+hr{border:0;border-top:1px solid var(--line);margin:2.2em 0}
+table{width:100%;border-collapse:collapse;margin:1.2em 0;font-size:.94rem}
+th,td{padding:9px 12px;border:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#eaf2f5;color:#183b4d;font-weight:700}
+tr:nth-child(even) td{background:#f8fafb}
+footer{margin-top:22px;font-size:.86rem;color:var(--muted)}
+.back{display:inline-flex;align-items:center;gap:7px;margin-bottom:18px;padding:8px 15px;
+ background:var(--paper);border:1px solid var(--line);border-radius:9px;
+ font-size:.9rem;font-weight:600;text-decoration:none;color:var(--brand-dark)}
+.back:hover{background:var(--soft-blue)}
+</style>
+</head><body>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+<a class="back" href="index.html">&larr; Back to the toolkit</a>
+<header><p class="kick">Project record</p><h1>QA_REPORT</h1><p class="sub">Quality assurance report and limitations</p></header>
+<main id="main">
+<p>Review date: 12 October 2026</p>
+<h2>Release contents and format checks</h2>
+<table><thead><tr><th>Edition</th><th>HTML words</th><th>DOCX tables</th><th>PDF pages</th><th>Page size</th><th>PDF text extracted</th></tr></thead><tbody>
+<tr><td>Advanced Networking &amp; CCNA</td><td>~10,500</td><td>31</td><td>61</td><td>A4</td><td>Yes</td></tr>
+<tr><td>Intermediate Networking</td><td>~8,800</td><td>30</td><td>55</td><td>A4</td><td>Yes</td></tr>
+<tr><td>Basic Networking</td><td>~8,500</td><td>28</td><td>52</td><td>A4</td><td>Yes</td></tr>
+</tbody></table>
+<p>Supplied PDFs are <strong>A4 (210 × 297 mm)</strong>. Previous releases shipped US Letter (216 × 279 mm), which is not the standard paper size in Australia, the UK or the EU.</p>
+<h2>Automated checks performed on this build</h2>
+<ul>
+<li>All three editions: single stylesheet, three <code>!important</code> declarations remaining, zero dead selectors.</li>
+<li>Table captions: 31 / 30 / 28 tables and 31 / 30 / 28 captions respectively.</li>
+<li>In-page links: every anchor target resolves — zero unresolved across all three editions.</li>
+<li>Table of contents order matches document order in all three editions.</li>
+<li>Landmarks present: <code>main</code>, <code>footer</code>, skip link; <code>lang="en-AU"</code>.</li>
+<li>Metadata present on all pages: description, canonical, Open Graph, Twitter card, favicon, theme colour.</li>
+<li>External links: 123 of 126 reachable. Thirteen return HTTP 403 to automated requests only (Cloudflare-protected sites such as Stack Overflow, Reddit and Cloudflare Learn); three previously failed with 404 and have been repaired.</li>
+<li>No blank pages in any generated PDF. Mean page fill 84%, median 89%.</li>
+</ul>
+<h2>Technical fact-checks and corrections</h2>
+<ul>
+<li><strong>CCNA exam timing:</strong> verified against Cisco's own announcements. The 200-301 CCNA v1.1 exam is available through 2 February 2027 and v2.0 testing begins 3 February 2027. The advanced edition labels v2.0 as forward-looking preparation and directs readers to match the blueprint to their exam date.</li>
+<li><strong>DHCPv6:</strong> the standards reference was updated from RFC 8415 to <strong>RFC 9915</strong>, published January 2026, which obsoletes RFC 8415 and is now an Internet Standard (STD 102).</li>
+<li><strong>IPv6:</strong> link-local, global unicast, unique local and multicast ranges are correctly distinguished; NDP versus ARP and SLAAC versus DHCPv6 are separated; the default router is described as normally learned through Router Advertisements, not DHCPv6.</li>
+<li><strong>SMTP:</strong> TCP 25 relay, TCP 587 submission with STARTTLS and TCP 465 implicit-TLS submission are distinguished, with a caveat that provider configuration varies.</li>
+<li><strong>Wi-Fi:</strong> symptom-first workflow retained, with WPA2-Personal separated from WPA2-Enterprise / 802.1X.</li>
+<li><strong>Subnetting and media:</strong> /16–/23 reference values retained, and the conventional usable-host calculation is explicitly not applied to /31 and /32. Copper and fibre figures remain qualified by installation, channel, transceiver and standard.</li>
+</ul>
+<h2>Changes made in this release</h2>
+<ul>
+<li>The exported HTML pages were rebuilt with one stylesheet instead of four cascading blocks, removing the need for the earlier <code>36em</code> override.</li>
+<li>Print rules were consolidated: A4, 10.5 pt body text, <code>orphans</code>/<code>widows</code> extended to list items, repeated table headers across split tables, and no forced break after the contents.</li>
+<li>Landing page redesigned to share the documents' design tokens.</li>
+</ul>
+<h2>Known limitations</h2>
+<ul>
+<li>The HTML internal links and landing-page paths were checked automatically. A targeted set of authoritative references was checked via current search results, including Cisco CCNA, IETF RFC 9915, RFC 4861, RFC 4862, RFC 6409, RFC 8314 and Microsoft wireless troubleshooting. <strong>Not every external URL was independently opened or tested end-to-end</strong>, and linked pages can change.</li>
+<li>PDFs are generated from the HTML rather than from the editable Word files. They therefore paginate differently from the Word version, although they carry the same content, the same A4 page size and the same page numbering. If the Word file is edited, the PDF should be regenerated from it.</li>
+<li>Dark mode is enabled on the landing page and in the editions. Print output is always light.</li>
+<li>This is an educational reference, not a guarantee of correctness for every vendor, software version or network design. Verify critical commands and changes in an authorised lab or an approved change window.</li>
+</ul>
+</main>
+<footer>Networking Reference &amp; Tools · Release 1.3 · Last reviewed 12 October 2026 ·
+ Educational reference only. Use only on systems you are authorised to inspect or administer.</footer>
+</body></html>

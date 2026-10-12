@@ -1,0 +1,2706 @@
+<!DOCTYPE html>
+
+<html lang="en-AU" xml:lang="" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta content="pandoc" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/><style>
+/* ===========================================================================
+   Networking Reference & Tools — edition stylesheet
+   Single source of truth. Tokens mirror the landing page.
+   =========================================================================== */
+:root{
+  --brand:#17677c; --brand-dark:#124657; --brand-light:#2b8490; --brand-solid:#17677c;
+  --ink:#243746; --muted:#5c6b76; --line:#d7e1e8; --line-soft:#e7edf0;
+  --paper:#fff; --soft:#f4f8fa; --soft-blue:#eaf4f7; --zebra:#f8fafb;
+  --thead:#eaf2f5; --thead-ink:#183b4d;
+  --accent:#d9a441; --amber-bg:#fff9ec; --amber-ink:#5d4a26;
+  --code-bg:#132735; --code-ink:#edf7fa;
+  --radius:16px; --radius-sm:9px;
+  --shadow:0 10px 30px rgba(22,43,59,.07);
+  --wrap:1180px;
+  --toolbar-h:74px;              /* sticky toolbar height + offset */
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --brand:#5cb8ca; --brand-dark:#9fd9e5; --brand-light:#2b8490; --brand-solid:#0f5468;
+    --ink:#e6eef3; --muted:#a9bac5; --line:#2b4256; --line-soft:#24394b;
+    --paper:#152634; --soft:#0f1d28; --soft-blue:#14313f; --zebra:#1a2e3d;
+    --thead:#1d3d4e; --thead-ink:#dcecf2;
+    --accent:#e8bd63; --amber-bg:#2c2313; --amber-ink:#f0dcae;
+    --code-bg:#0a161e; --code-ink:#e2f1f6;
+    --shadow:0 10px 30px rgba(0,0,0,.38);
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0 auto;max-width:var(--wrap);width:calc(100% - 40px);
+  padding:18px 0 64px;
+  font:400 16px/1.68 Inter,"Segoe UI",Roboto,system-ui,-apple-system,Arial,sans-serif;
+  letter-spacing:.005em;color:var(--ink);background:transparent;
+}
+
+/* ---------- accessibility helpers ---------- */
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--brand-solid);
+  color:#fff;padding:.7rem 1.1rem;border-radius:0 0 var(--radius-sm) 0;font-weight:700;text-decoration:none}
+.skip:focus{left:0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- sticky toolbar ---------- */
+.toolbar{
+  position:sticky;top:10px;z-index:20;
+  display:flex;justify-content:flex-end;align-items:center;gap:10px;
+  margin:0 0 16px;padding:9px 12px;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  border:1px solid var(--line);border-radius:14px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.toolbar button,.toolbar a{
+  display:inline-flex;align-items:center;justify-content:center;
+  border:0;border-radius:var(--radius-sm);padding:9px 15px;
+  background:var(--brand-solid);color:#fff;text-decoration:none;
+  font:600 14px/1.2 Inter,"Segoe UI",Roboto,system-ui,sans-serif;cursor:pointer;
+}
+.toolbar .secondary{background:var(--soft-blue);color:var(--brand-dark)}
+.toolbar button:hover,.toolbar a:hover{filter:brightness(1.1)}
+
+/* ---------- hero ---------- */
+#title-block-header{
+  position:relative;margin:0 0 20px;padding:clamp(28px,5vw,58px);
+  background:linear-gradient(125deg,#123448 0%,#17677c 58%,#2b8490 100%);
+  border-radius:22px;box-shadow:var(--shadow);color:#fff;overflow:hidden;
+}
+@media (prefers-color-scheme:dark){
+  #title-block-header{background:linear-gradient(125deg,#0c1e2b 0%,#134052 58%,#1a5b68 100%)}
+}
+#title-block-header::before{content:"NETWORKING REFERENCE & TOOLS";display:block;
+  font-size:.76rem;letter-spacing:.17em;font-weight:800;color:#d9edf1;margin-bottom:18px}
+#title-block-header::after{content:"FIELD GUIDE  /  STUDY REFERENCE";display:block;
+  margin-top:26px;padding-top:14px;border-top:1px solid rgba(255,255,255,.25);
+  font-size:.7rem;letter-spacing:.16em;font-weight:700;color:#d9edf1}
+#title-block-header h1.title{
+  margin:0;max-width:900px;color:#fff;
+  font-size:clamp(1.9rem,3.6vw,3rem);   /* was 3.65rem — capped smaller for a document */
+  line-height:1.1;letter-spacing:-.03em;font-weight:780;text-wrap:balance;
+}
+.version-stamp{margin:18px 0 0;color:#e2f1f4;font-size:.95rem;letter-spacing:.03em}
+
+/* ---------- cover block ---------- */
+.edition-cover{margin:20px 0 26px;padding:clamp(22px,4vw,38px);
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow)}
+.cover-kicker{margin:0 0 10px;color:var(--brand);font-size:.76rem;font-weight:800;
+  letter-spacing:.15em;text-transform:uppercase}
+.cover-edition{margin:0 0 20px;color:var(--muted);font-size:1rem;line-height:1.55;font-weight:600}
+.cover-author{display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;
+  padding:7px 13px;border-radius:999px;background:var(--soft-blue);
+  color:var(--brand-dark);font-size:.95rem;font-weight:700;letter-spacing:.02em}  /* was .82rem */
+.cover-author::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.cover-purpose{margin:0;padding:18px 20px;background:var(--soft);
+  border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;
+  color:var(--ink);font-size:1rem;line-height:1.7}
+.cover-purpose strong{display:block;margin-bottom:5px;color:var(--brand-dark);
+  font-size:.78rem;letter-spacing:.11em;text-transform:uppercase}
+
+/* ---------- table of contents ---------- */
+#TOC{margin:24px 0 30px;padding:22px 26px;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+#TOC .contents-label{font-size:1.15rem;font-weight:800;color:var(--ink)}
+#TOC ul{padding-left:0;margin:.25rem 0;columns:2;column-gap:38px}
+#TOC>ul>li{break-inside:avoid;margin:0 0 10px;padding:9px 12px;border-radius:9px;background:var(--zebra)}
+#TOC ul ul{columns:1;margin:7px 0 0;padding-left:12px;border-left:2px solid var(--soft-blue)}
+#TOC ul ul li{margin:3px 0;break-inside:avoid}
+#TOC li{list-style:none}
+#TOC a{color:var(--brand-dark);text-decoration:none;font-size:.95rem;line-height:1.45;  /* was .88rem */}
+#TOC a:hover{text-decoration:underline;color:var(--brand-solid)}
+
+/* ---------- typography ---------- */
+h1,h2,h3,h4{color:var(--ink);line-height:1.25;letter-spacing:-.018em;
+  scroll-margin-top:calc(var(--toolbar-h) + 14px);text-wrap:balance}  /* clears sticky toolbar */
+main>h1,main>section>h1{font-size:clamp(1.6rem,2.8vw,2.15rem);
+  padding-bottom:12px;border-bottom:2px solid var(--line-soft);margin-top:2.2em}
+main>h1:first-child{margin-top:0}
+h2{font-size:clamp(1.22rem,1.9vw,1.55rem);margin-top:2.2em}
+h3{font-size:1.14rem;margin-top:1.7em}
+p{margin:.85em 0;line-height:1.72;text-wrap:pretty}
+li{margin:.3rem 0}
+a{color:var(--brand);text-underline-offset:3px}
+ul,ol{padding-left:1.7em;margin-top:1em}
+li>ol,li>ul{margin-top:0}
+hr{border:0;border-top:1px solid var(--line);margin:2em 0}
+
+/* ---------- tables ---------- */
+table{width:100%;border-collapse:separate;border-spacing:0;margin:20px 0 26px;
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  font-size:.95rem;line-height:1.5;font-variant-numeric:lining-nums tabular-nums}
+caption{caption-side:top;padding:12px 14px 10px;text-align:left;
+  font-size:.88rem;font-weight:700;color:var(--brand-dark);background:var(--soft);
+  border-bottom:1px solid var(--line)}
+thead th{background:var(--thead);color:var(--thead-ink);font-weight:750;text-align:left}
+th,td{padding:11px 14px;vertical-align:top;border-bottom:1px solid var(--line-soft)}
+tbody tr:nth-child(even) td{background:var(--zebra)}
+tbody tr:last-child td{border-bottom:0}
+
+/* ---------- code ---------- */
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  font-size:.88em;background:var(--soft-blue);padding:.1em .3em;border-radius:4px}
+pre{margin:1.1rem 0;padding:16px 18px;background:var(--code-bg);color:var(--code-ink);
+  border-radius:12px;line-height:1.55;overflow-x:auto;font-size:.92rem}
+pre code{background:none;padding:0;font-size:1em}
+
+/* ---------- callouts ---------- */
+blockquote{margin:1.1rem 0;padding:14px 18px;border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;background:var(--amber-bg);color:var(--amber-ink)}
+blockquote p{margin:.4em 0}
+.workflow{padding:14px 17px;background:var(--soft-blue);border:1px solid var(--line);
+  border-radius:10px}
+.escalation-note{margin:22px 0;padding:18px 20px;border:1px solid var(--line);
+  border-left:4px solid #bd7a00;border-radius:14px;background:var(--paper);
+  box-shadow:0 5px 18px rgba(22,43,59,.04)}
+.module-intro{padding:15px 18px;background:var(--soft-blue);
+  border-left:4px solid var(--brand);border-radius:0 10px 10px 0;color:var(--ink)}
+
+.daily-use,.supplement,.edition-module{
+  margin:24px 0;padding:22px;border:1px solid var(--line);border-radius:14px;
+  background:var(--paper);box-shadow:0 5px 18px rgba(22,43,59,.04)}
+.edition-module{border-top:3px solid var(--brand)}
+.daily-use>h2:first-child,.supplement>h2:first-child{margin-top:0}
+
+/* ---------- flowchart ---------- */
+.flow-figure{margin:22px 0;padding:clamp(12px,2vw,24px);background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.flow-figure svg{display:block;width:100%;height:auto}
+.flow-figure figcaption{margin-top:12px;font-size:.92rem;color:var(--muted)}  /* was .88rem */
+
+/* ---------- closing footer ---------- */
+.docfoot{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:.9rem;color:var(--muted);line-height:1.62}
+.docfoot p{margin:.6em 0}
+
+/* ---------- motion ---------- */
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
+/* ---------- responsive ---------- */
+@media (max-width:760px){
+  body{width:calc(100% - 24px);padding:10px 0 44px;font-size:16px}
+  #title-block-header{padding:27px 22px;border-radius:16px}
+  #title-block-header::before{margin-bottom:14px}
+  #title-block-header::after{margin-top:20px}
+  .edition-cover{padding:22px 18px}
+  .toolbar{position:static;background:var(--paper);backdrop-filter:none;padding:10px}
+  :root{--toolbar-h:12px}          /* toolbar no longer floats on mobile */
+  #TOC{padding:17px}
+  #TOC ul{columns:1}
+  .daily-use,.supplement,.edition-module{padding:16px 14px}
+  table{font-size:.95rem}          /* was .86rem = 14.57px, too small on a phone */
+  th,td{padding:10px 11px}
+}
+@media (max-width:420px){
+  body{font-size:15.5px}
+  table{font-size:.9rem}
+}
+
+/* ===========================================================================
+   PRINT — A4, folio, and break rules
+   =========================================================================== */
+@page{size:A4;margin:17mm 15mm 16mm}
+@media print{
+  html{background:#fff}
+  body{max-width:none;width:auto;margin:0;padding:0;background:#fff;color:#000;
+    font-size:10.5pt;line-height:1.45}          /* was 11pt vs 10pt!important */
+  .skip,.toolbar{display:none !important}
+
+  /* hero flattens for print */
+  #title-block-header{background:#fff !important;color:#000;padding:0 0 14px;
+    border:0;border-bottom:2px solid var(--brand-dark);border-radius:0;box-shadow:none}
+  #title-block-header::before,#title-block-header::after{color:#555}
+  #title-block-header h1.title{color:#000;font-size:22pt}
+  .version-stamp{color:#333}
+
+  .edition-cover,.daily-use,.supplement,.flow-figure,.escalation-note,.docfoot{
+    box-shadow:none;border:1px solid #ccc}
+
+  /* The 87%-blank page: let the contents flow instead of forcing a break after it. */
+  #TOC{break-after:auto;box-shadow:none;columns:2}
+  #TOC>li,#TOC ul li{break-inside:avoid}
+
+  h1,h2,h3{break-after:avoid;break-inside:avoid}
+  h1,h2{color:#000}
+  p,li{orphans:3;widows:3}                       /* extended from p,h2,h3 */
+  blockquote,.workflow,.escalation-note,.module-intro{break-inside:avoid}
+  tr,thead{break-inside:avoid}
+  thead{display:table-header-group}              /* repeat headers on split tables */
+  table,pre{break-inside:auto}                   /* avoid is ignored when taller than a page */
+  pre{background:#f4f4f4;color:#111;border:1px solid #ccc}
+  caption{background:#fff;color:#000}
+  a{color:inherit;text-decoration:none}
+  .flow-figure{break-before:page;break-inside:avoid}
+  .flow-figure svg{max-height:238mm}
+}
+</style><meta content="Verification patterns, routing and policy scenarios, OSPF, IPv6, operations, automation safety and a forward-looking CCNA v2.0 coverage map." name="twitter:description"/><meta content="Networking Reference &amp; Tools — Advanced Networking &amp; CCNA Preparation" name="twitter:title"/><meta content="summary" name="twitter:card"/><meta content="https://remy-l-95.github.io/networking-reference-toolkit/Networking_Reference_and_Tools_Advanced_Networking_CCNA_Online.html" property="og:url"/><meta content="Verification patterns, routing and policy scenarios, OSPF, IPv6, operations, automation safety and a forward-looking CCNA v2.0 coverage map." property="og:description"/><meta content="Networking Reference &amp; Tools — Advanced Networking &amp; CCNA Preparation" property="og:title"/><meta content="article" property="og:type"/><meta content="#123448" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2317677c'/%3E%3Cg stroke='%23d9edf1' stroke-width='1.6' fill='none'%3E%3Cpath d='M8 21h16M16 21V11M9 11h14'/%3E%3C/g%3E%3Ccircle cx='16' cy='10' r='2.6' fill='%23d9a441'/%3E%3Cg fill='%23d9edf1'%3E%3Ccircle cx='8' cy='22' r='2.1'/%3E%3Ccircle cx='24' cy='22' r='2.1'/%3E%3Ccircle cx='16' cy='22' r='2.1'/%3E%3C/g%3E%3C/svg%3E" rel="icon"/><link href="https://remy-l-95.github.io/networking-reference-toolkit/Networking_Reference_and_Tools_Advanced_Networking_CCNA_Online.html" rel="canonical"/><meta content="Verification patterns, routing and policy scenarios, OSPF, IPv6, operations, automation safety and a forward-looking CCNA v2.0 coverage map." name="description"/>
+<title>Networking Reference &amp; Tools — Advanced Networking &amp; CCNA Preparation: quick-reference sheets, troubleshooting playbooks and commands</title>
+
+
+
+
+</head>
+<body id="top"><a class="skip" href="#main">Skip to content</a>
+<div class="toolbar"><button onclick="window.print()">Print / Save as PDF</button><a class="secondary" href="#top">Back to top</a></div>
+<header id="title-block-header">
+<h1 class="title" id="networking-reference-and-tools-advanced-networking-and-ccna-preparation">Networking Reference &amp; Tools — Advanced Networking &amp; CCNA Preparation</h1>
+<p class="version-stamp">Version 1.3 • Last reviewed: 12 October 2026</p></header><main id="main"><section aria-label="Edition overview" class="edition-cover">
+<p class="cover-kicker">Practical reference · Version 1.3</p>
+<p class="cover-edition">ADVANCED NETWORKING &amp; CCNA PREPARATION EDITION • Includes a forward-looking CCNA v2.0 coverage map</p>
+<p class="cover-author">Compiled and curated by Remy Lawyer</p>
+<p class="cover-purpose"><strong>Design goal</strong>A compact companion for networking students: fast to scan, easy to revisit, and focused on applying knowledge. It complements formal courses rather than replacing them.</p>
+</section><aside class="daily-use"><h2 id="choose-the-right-depth">Choose the right depth</h2><p><strong>Basic:</strong> identify the likely fault layer and gather first-response evidence. <strong>Intermediate:</strong> isolate VLAN, routing, DHCP/DNS and packet-level faults. <strong>Advanced:</strong> reason across routing, policy, IPv6, operations and change control.</p><p>Jump to the <a href="#diagnostic-flow">troubleshooting flow</a> or the <a href="#advanced-scenario-lab">edition-specific workbench</a>.</p></aside><h1 id="how-to-use-this-reference">How to use this reference</h1><p>This edition is a focused reference for learners who already
+understand basic networking and can read common device command output.
+It brings together higher-level concepts and CCNA-oriented verification
+patterns.</p><p>Treat command examples as a study reference, not a substitute for the
+platform-specific configuration guide. Syntax and feature support can
+vary by device, software release, and lab environment.</p><p>This edition includes a forward-looking map to Cisco 200-301 CCNA v2.0 topics. Cisco states that v1.1 remains available through 2 February 2027 and v2.0 testing begins 3 February 2027. Check the official blueprint matching your exam date.</p><p>Document revision: 1.3 • Last reviewed: 12 October 2026. Verify platform-specific syntax and current vendor guidance before making changes.</p><p>This toolkit was developed with assistance from AI tools for drafting, organisation and refinement. The content was reviewed by the author against their own networking knowledge and learning, with the aim of improving accuracy, clarity and practical usefulness. The resource is subject to ongoing technical review, fact-checking against authoritative documentation, and refinement based on external feedback. Readers should verify critical procedures against current vendor documentation and test configurations in an appropriate lab or authorised environment.</p><p>Suggested order: scan the relevant cheat sheet → run the simplest
+useful check → compare the result with the playbook → record the
+finding.</p><section class="daily-use" id="daily-use-quick-reference">
+<h1 id="daily-use-quick-reference">Daily-use quick reference</h1>
+<p>Start with scope and evidence. The quickest useful test is the one that separates likely causes without changing the system.</p>
+<p class="workflow"><strong>Repeatable workflow:</strong> Define the symptom → identify who/what is affected → inspect link and address configuration → test gateway → test a known IP → test DNS/name resolution → inspect the route and service → change one thing only with approval → verify and record.</p>
+<table><caption>Choose the right depth</caption><thead><tr><th>Symptom</th><th>First checks</th><th>Next useful distinction</th></tr></thead><tbody>
+<tr><td>One device offline</td><td>Adapter/link, Wi-Fi association, IP/prefix, gateway, DNS</td><td>Compare with a working device on the same network.</td></tr>
+<tr><td>169.254.x.x IPv4 on a DHCP client</td><td>DHCP lease, VLAN/SSID, DHCP server/relay, scope exhaustion</td><td>Check whether other clients on the same segment obtain leases.</td></tr>
+<tr><td>IP works; name fails</td><td>Configured DNS servers, resolver response, suffix/search policy</td><td>Compare a known-good name and a direct IP test; do not treat one ping result as conclusive.</td></tr>
+<tr><td>Local subnet works; remote network fails</td><td>Default route, next hop, routing table, ACL/firewall, return path</td><td>Use traceroute/tracert and device-side route checks where authorised.</td></tr>
+<tr><td>Wi-Fi connected but slow or intermittent</td><td>Scope of impact, signal, band, channel use, roaming, driver, AP/controller events</td><td>Compare near the AP, another client, and wired service where possible.</td></tr>
+<tr><td>One service/port fails</td><td>Correct hostname/IP, port, protocol, service state, listening socket</td><td>Separate name resolution, route, firewall, TCP reachability, TLS and application health.</td></tr>
+<tr><td>Multiple users/sites affected</td><td>Time of onset, shared dependency, recent changes, monitoring/alerts</td><td>Escalate early with evidence; avoid isolated endpoint resets that destroy clues.</td></tr>
+</tbody></table>
+<p><strong>Escalate promptly</strong> for suspected security incidents, broad outages, repeated production failures, unknown/unauthorised configuration changes, risk of data loss, or when the next step exceeds your access, authority, change window or rollback capability.</p>
+</section><h1 id="quick-reference-cheat-sheets">1. Quick-reference cheat
+sheets</h1><h2 id="network-devices-and-their-jobs">1.1 Network devices and their
+jobs</h2><table><caption>1.1 Network devices and their jobs</caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Component</strong></th>
+<th><strong>Primary function</strong></th>
+<th><strong>Useful reminder</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NIC / network adapter</td>
+<td>Connects a device to Ethernet or Wi-Fi.</td>
+<td>Check interface state, driver, link, and assigned
+configuration.</td>
+</tr>
+<tr class="even">
+<td>Repeater / hub</td>
+<td>Repeats signals; a traditional hub sends incoming bits to all other
+ports.</td>
+<td>Mostly legacy; hubs do not learn MAC addresses.</td>
+</tr>
+<tr class="odd">
+<td>Layer 2 switch</td>
+<td>Forwards Ethernet frames based on learned MAC addresses and VLAN
+membership.</td>
+<td>Check port state, VLAN, MAC table, and trunking.</td>
+</tr>
+<tr class="even">
+<td>Router</td>
+<td>Forwards IP packets between networks using a routing table.</td>
+<td>Check route, next hop, interface state, and policy.</td>
+</tr>
+<tr class="odd">
+<td>Layer 3 switch</td>
+<td>Combines switching with routing between VLANs/subnets.</td>
+<td>SVIs and routing must be configured and operational.</td>
+</tr>
+<tr class="even">
+<td>Wireless access point</td>
+<td>Bridges wireless clients to a wired LAN.</td>
+<td>SSID, authentication, radio conditions, VLAN mapping, and uplink
+matter.</td>
+</tr>
+<tr class="odd">
+<td>Firewall</td>
+<td>Allows or denies traffic according to security policy.</td>
+<td>Check direction, source/destination, protocol, port, state, and rule
+order.</td>
+</tr>
+<tr class="even">
+<td>Modem / ONT</td>
+<td>Terminates a provider access technology.</td>
+<td>Link synchronisation does not guarantee working internet
+service.</td>
+</tr>
+<tr class="odd">
+<td>DNS resolver</td>
+<td>Finds DNS records for client queries, often using cache and upstream
+servers.</td>
+<td>Separate client-to-resolver reachability from
+resolver-to-authoritative resolution.</td>
+</tr>
+<tr class="even">
+<td>DHCP server</td>
+<td>Leases addresses and provides network settings.</td>
+<td>Scope, exclusions, lease, relay, and VLAN path matter.</td>
+</tr>
+</tbody>
+</table><h2 id="osi-model-at-a-glance">1.2 OSI model at a glance</h2><table><caption>1.2 OSI model at a glance</caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Layer</strong></th>
+<th><strong>Name</strong></th>
+<th><strong>Examples / troubleshooting focus</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7</td>
+<td>Application</td>
+<td>HTTP(S), DNS, DHCP; application settings and service responses.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Presentation</td>
+<td>Data representation, encoding, encryption formats; often folded into
+application implementations.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Session</td>
+<td>Dialog/session management; conceptual separation varies in real
+stacks.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Transport</td>
+<td>TCP, UDP; ports, connection setup, retransmission, listening
+service.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Network</td>
+<td>IPv4/IPv6, ICMP, routing; IP addressing, masks, routes.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Data Link</td>
+<td>Ethernet, Wi-Fi MAC, VLANs, ARP for IPv4 neighbour mapping; frames
+and switching.</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>Physical</td>
+<td>Copper, fibre, radio, connectors, signal, link state.</td>
+</tr>
+</tbody>
+</table><table><caption>1.2 OSI model at a glance (part 2)</caption>
+<colgroup>
+<col style="width: 100%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Use OSI as a diagnostic model Start with the lowest
+plausible failure, but do not force every problem into exactly one
+layer. Real faults can cross layers.</strong></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table><h2 id="tcpip-model">1.3 TCP/IP model</h2><table><caption>1.3 TCP/IP model</caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>TCP/IP layer</strong></th>
+<th><strong>Typical functions</strong></th>
+<th><strong>OSI relationship (approximate)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Application</td>
+<td>Application protocols and data formats</td>
+<td>OSI 5–7</td>
+</tr>
+<tr class="even">
+<td>Transport</td>
+<td>End-to-end process communication; TCP/UDP</td>
+<td>OSI 4</td>
+</tr>
+<tr class="odd">
+<td>Internet</td>
+<td>IP addressing and packet routing</td>
+<td>OSI 3</td>
+</tr>
+<tr class="even">
+<td>Link / Network access</td>
+<td>Local delivery over Ethernet/Wi-Fi and physical media</td>
+<td>OSI 1–2</td>
+</tr>
+</tbody>
+</table><h2 id="common-protocols-and-systems">1.4 Common protocols and
+systems</h2><table><caption>1.4 Common protocols and systems</caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Protocol / system</strong></th>
+<th><strong>What it does</strong></th>
+<th><strong>Related ideas</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>IPv4 / IPv6</td>
+<td>Logical addressing and packet delivery across networks.</td>
+<td>Subnets, routing, gateways, ICMP.</td>
+</tr>
+<tr class="even">
+<td>Ethernet</td>
+<td>Wired LAN framing and link operation.</td>
+<td>MAC addresses, switches, VLAN tags.</td>
+</tr>
+<tr class="odd">
+<td>ARP (IPv4)</td>
+<td>Finds a local-link MAC address for an IPv4 neighbour.</td>
+<td>Broadcast domain, ARP cache, gateway MAC.</td>
+</tr>
+<tr class="even">
+<td>NDP (IPv6)</td>
+<td>IPv6 neighbour discovery and related local-link functions.</td>
+<td>ICMPv6, router discovery, address resolution.</td>
+</tr>
+<tr class="odd">
+<td>ICMP</td>
+<td>Error reporting and diagnostic messaging for IP.</td>
+<td>ping, traceroute/tracert; may be filtered.</td>
+</tr>
+<tr class="even">
+<td>TCP</td>
+<td>Reliable, ordered byte stream.</td>
+<td>Ports, SYN/SYN-ACK/ACK, retransmissions.</td>
+</tr>
+<tr class="odd">
+<td>UDP</td>
+<td>Datagram transport without built-in delivery guarantee.</td>
+<td>DNS, DHCP, NTP, real-time applications.</td>
+</tr>
+<tr class="even">
+<td>DNS</td>
+<td>Resolves names and stores other domain data.</td>
+<td>A, AAAA, CNAME, MX, PTR, TXT records.</td>
+</tr>
+<tr class="odd">
+<td>DHCPv4</td>
+<td>Leases IPv4 settings dynamically.</td>
+<td>Discover, Offer, Request, Acknowledge (DORA).</td>
+</tr>
+<tr class="even">
+<td>HTTP / HTTPS</td>
+<td>Web application protocol; HTTPS uses TLS protection.</td>
+<td>TCP 80/443 commonly; HTTP/3 uses QUIC over UDP.</td>
+</tr>
+<tr class="odd">
+<td>SSH</td>
+<td>Secure remote shell and tunnelling.</td>
+<td>TCP 22 commonly; key-based authentication.</td>
+</tr>
+<tr class="even">
+<td>NTP</td>
+<td>Synchronises clocks.</td>
+<td>Timestamps, certificates, logs, authentication.</td>
+</tr>
+<tr class="odd">
+<td>SNMP</td>
+<td>Monitoring and management of network devices.</td>
+<td>Managers, agents, MIBs; secure versions/configuration
+preferred.</td>
+</tr>
+<tr class="even">
+<td>Syslog</td>
+<td>Transports or records system log messages.</td>
+<td>Severity, central logging, incident timelines.</td>
+</tr>
+<tr class="odd">
+<td>TLS</td>
+<td>Protects data in transit and authenticates endpoints when correctly
+configured.</td>
+<td>Certificates, trust chain, hostname, expiry.</td>
+</tr>
+<tr class="even">
+<td>NAT/PAT</td>
+<td>Translates IP addresses and often transport ports.</td>
+<td>Private IPv4, state tracking, inbound rules.</td>
+</tr>
+<tr class="odd">
+<td>802.1Q</td>
+<td>Adds VLAN tags to Ethernet frames on trunks.</td>
+<td>Allowed VLAN list and native VLAN behaviour.</td>
+</tr>
+<tr class="even">
+<td>STP/RSTP</td>
+<td>Prevents Layer 2 loops by controlling redundant paths.</td>
+<td>Root bridge, blocked/discarding ports, topology changes.</td>
+</tr>
+<tr class="odd">
+<td>OSPF</td>
+<td>Link-state interior routing protocol.</td>
+<td>Neighbours, areas, LSDB, routes, metrics.</td>
+</tr>
+<tr class="even">
+<td>BGP</td>
+<td>Exchanges routing information between autonomous systems and in some
+internal designs.</td>
+<td>Peering, prefixes, policy, AS path.</td>
+</tr>
+</tbody>
+</table><h2 id="common-ports">1.5 Common ports</h2><table><caption>1.5 Common ports</caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Port / protocol</strong></th>
+<th><strong>Service</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>20/21 TCP</td>
+<td>FTP data/control</td>
+<td>Legacy and unencrypted by default; mode affects data
+connections.</td>
+</tr>
+<tr class="even">
+<td>22 TCP</td>
+<td>SSH</td>
+<td>Secure remote access.</td>
+</tr>
+<tr class="odd">
+<td>23 TCP</td>
+<td>Telnet</td>
+<td>Unencrypted; avoid on untrusted networks.</td>
+</tr>
+<tr class="even">
+<td>25 TCP</td>
+<td>SMTP relay</td>
+<td>Mail transfer; client submission often uses 587 or 465 depending on
+setup.</td>
+</tr>
+<tr class="odd">
+<td>53 TCP/UDP</td>
+<td>DNS</td>
+<td>Both transports are used in different cases.</td>
+</tr>
+<tr class="even">
+<td>67/68 UDP</td>
+<td>DHCPv4 server/client</td>
+<td>Address leasing.</td>
+</tr>
+<tr class="odd">
+<td>69 UDP</td>
+<td>TFTP</td>
+<td>Simple file transfer; limited security.</td>
+</tr>
+<tr class="even">
+<td>80 TCP</td>
+<td>HTTP</td>
+<td>Web traffic without TLS.</td>
+</tr>
+<tr class="odd">
+<td>110 TCP</td>
+<td>POP3</td>
+<td>Email retrieval; secure configurations differ.</td>
+</tr>
+<tr class="even">
+<td>123 UDP</td>
+<td>NTP</td>
+<td>Time synchronisation.</td>
+</tr>
+<tr class="odd">
+<td>143 TCP</td>
+<td>IMAP</td>
+<td>Email access; secure options available.</td>
+</tr>
+<tr class="even">
+<td>161/162 UDP</td>
+<td>SNMP query/traps</td>
+<td>Access control and version matter.</td>
+</tr>
+<tr class="odd">
+<td>389 TCP/UDP</td>
+<td>LDAP</td>
+<td>Directory access; secure deployments use appropriate
+protections.</td>
+</tr>
+<tr class="even">
+<td>443 TCP; UDP 443 for QUIC</td>
+<td>HTTPS / HTTP/3</td>
+<td>HTTPS commonly uses TCP; HTTP/3 uses QUIC over UDP.</td>
+</tr>
+<tr class="odd">
+<td>445 TCP</td>
+<td>SMB</td>
+<td>Windows file/printer sharing; restrict exposure.</td>
+</tr>
+<tr class="even">
+<td>514 UDP commonly</td>
+<td>Syslog</td>
+<td>Transport/security depends on implementation.</td>
+</tr>
+<tr class="odd">
+<td>587 TCP</td>
+<td>SMTP submission</td>
+<td>Client-to-server mail submission commonly uses STARTTLS.</td>
+</tr>
+<tr class="even">
+<td>636 TCP</td>
+<td>LDAPS</td>
+<td>LDAP over TLS.</td>
+</tr>
+<tr class="odd">
+<td>3389 TCP/UDP</td>
+<td>RDP</td>
+<td>Remote Desktop; tightly restrict access.</td>
+</tr>
+<tr class="even">
+<td>3306 TCP</td>
+<td>MySQL</td>
+<td>Database service; do not expose unnecessarily.</td>
+</tr>
+<tr class="odd">
+<td>5432 TCP</td>
+<td>PostgreSQL</td>
+<td>Database service; restrict and authenticate.</td>
+</tr>
+</tbody>
+</table><table><caption>1.5 Common ports (part 2)</caption>
+<colgroup>
+<col style="width: 100%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Port reminder A port number identifies a transport-layer
+endpoint, not a physical switch port. Service defaults can be changed;
+confirm the actual configuration.</strong></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table><h2 id="ipv4-subnetting-pocket-reference">1.6 IPv4 subnetting pocket
+reference</h2><table><caption>1.6 IPv4 subnetting pocket reference</caption>
+<colgroup>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>CIDR</strong></th>
+<th><strong>Subnet mask</strong></th>
+<th><strong>Total addresses</strong></th>
+<th><strong>Conventional usable hosts</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>/24</td>
+<td>255.255.255.0</td>
+<td>256</td>
+<td>254</td>
+</tr>
+<tr class="even">
+<td>/25</td>
+<td>255.255.255.128</td>
+<td>128</td>
+<td>126</td>
+</tr>
+<tr class="odd">
+<td>/26</td>
+<td>255.255.255.192</td>
+<td>64</td>
+<td>62</td>
+</tr>
+<tr class="even">
+<td>/27</td>
+<td>255.255.255.224</td>
+<td>32</td>
+<td>30</td>
+</tr>
+<tr class="odd">
+<td>/28</td>
+<td>255.255.255.240</td>
+<td>16</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td>/29</td>
+<td>255.255.255.248</td>
+<td>8</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>/30</td>
+<td>255.255.255.252</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>/31</td>
+<td>255.255.255.254</td>
+<td>2</td>
+<td>2 for point-to-point use under RFC 3021</td>
+</tr>
+<tr class="odd">
+<td>/32</td>
+<td>255.255.255.255</td>
+<td>1</td>
+<td>Not applicable — single-address host route</td>
+</tr>
+</tbody>
+</table><blockquote>
+<p>• Block size in the interesting octet = 256 − the mask value in that
+octet.</p>
+<p>• Subnet boundaries occur at multiples of the block size.</p>
+<p>• For conventional IPv4 subnets, identify network, first host, last
+host, and broadcast.</p>
+<p>• /31 point-to-point links and /32 host routes are special cases.</p>
+<p>• Cross-check non-trivial calculations with a second method or a
+trusted calculator.</p>
+</blockquote><table><caption>1.6 IPv4 subnetting pocket reference (part 2)</caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Worked example</strong></th>
+<th><strong>Result</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Address</td>
+<td>192.168.10.77/26</td>
+</tr>
+<tr class="even">
+<td>Mask / block size</td>
+<td>255.255.255.192 / block size 64 in the final octet</td>
+</tr>
+<tr class="odd">
+<td>Boundaries</td>
+<td>0, 64, 128, 192</td>
+</tr>
+<tr class="even">
+<td>Network</td>
+<td>192.168.10.64/26</td>
+</tr>
+<tr class="odd">
+<td>Host range</td>
+<td>192.168.10.65–192.168.10.126</td>
+</tr>
+<tr class="even">
+<td>Broadcast</td>
+<td>192.168.10.127</td>
+</tr>
+<tr class="odd">
+<td>Conventional usable hosts</td>
+<td>62</td>
+</tr>
+</tbody>
+</table><h2 id="private-ipv4-ranges-and-special-addresses">1.7 Private IPv4
+ranges and special addresses</h2><table><caption>1.7 Private IPv4 ranges and special addresses</caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Range</strong></th>
+<th><strong>Purpose / caution</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>10.0.0.0/8</td>
+<td>Private IPv4 addressing.</td>
+</tr>
+<tr class="even">
+<td>172.16.0.0/12</td>
+<td>Private IPv4 addressing; 172.16–172.31 in the second octet.</td>
+</tr>
+<tr class="odd">
+<td>192.168.0.0/16</td>
+<td>Private IPv4 addressing.</td>
+</tr>
+<tr class="even">
+<td>169.254.0.0/16</td>
+<td>IPv4 link-local; often appears on Windows when DHCPv4 fails.</td>
+</tr>
+<tr class="odd">
+<td>127.0.0.0/8</td>
+<td>IPv4 loopback; 127.0.0.1 is the common local test address.</td>
+</tr>
+<tr class="even">
+<td>0.0.0.0</td>
+<td>Context-dependent; can mean unspecified address or default route
+notation.</td>
+</tr>
+<tr class="odd">
+<td>255.255.255.255</td>
+<td>Limited IPv4 broadcast address.</td>
+</tr>
+</tbody>
+</table><h2 id="vlan-and-trunk-reminders">1.8 VLAN and trunk reminders</h2><blockquote>
+<p>• Access port: normally places an endpoint into one data VLAN.</p>
+<p>• Trunk: carries multiple VLANs, usually using 802.1Q tags.</p>
+<p>• Allowed VLAN list: VLANs permitted across a trunk; VLAN existence
+and spanning-tree state still matter.</p>
+<p>• Native VLAN: untagged frames on an 802.1Q trunk are associated with
+the configured native VLAN on platforms using this model.</p>
+<p>• Native VLAN mismatches can cause traffic to land in the wrong VLAN
+or trigger warnings.</p>
+<p>• Inter-VLAN communication requires Layer 3 routing and suitable
+policy.</p>
+<p>• An SVI is a virtual Layer 3 interface associated with a VLAN; its
+operational state depends on platform and VLAN/port conditions.</p>
+</blockquote><h2 id="routing-reminders">1.9 Routing reminders</h2><blockquote>
+<p>• A router chooses a route using the destination IP and its routing
+table.</p>
+<p>• Longest-prefix match generally selects the most specific matching
+route.</p>
+<p>• A default route is used when no more specific route matches.</p>
+<p>• A route existing in the table does not prove the full path or
+return path works.</p>
+<p>• Check interface status, next-hop reachability, route source,
+ACLs/firewalls, and return routing.</p>
+</blockquote><h2 id="wi-fi-essentials">1.10 Wi-Fi essentials</h2><blockquote>
+<p>• SSID is the network name; it is not itself proof of authentication
+or internet access.</p>
+<p>• Signal strength, interference, channel utilisation, distance,
+walls, client capability, and AP placement all affect performance.</p>
+<p>• Strong signal bars do not guarantee gateway, DNS, or internet
+reachability.</p>
+<p>• Authentication/encryption settings must match client and access
+point requirements.</p>
+<p>• Compare wired and wireless results to isolate a radio-specific
+problem.</p>
+</blockquote><h1 id="troubleshooting-playbooks">2. Troubleshooting playbooks</h1><h2 id="one-device-has-no-connectivity">2.1 One device has no
+connectivity</h2><blockquote>
+<p>☐ Record exact error and determine whether other devices are
+affected.</p>
+<p>☐ Check adapter enabled state, cable/link lights, Wi-Fi association,
+and airplane mode.</p>
+<p>☐ Inspect IP address, mask/prefix, gateway, and DNS.</p>
+<p>☐ Look for an unexpected subnet or 169.254.x.x IPv4 address on
+Windows.</p>
+<p>☐ Test the gateway, then a known remote IP, then a domain name.</p>
+<p>☐ Compare with a working device on the same network.</p>
+<p>☐ Make one evidence-based change and repeat the original test.</p>
+</blockquote><h2 id="wi-fi-connected-but-internet-unavailable">2.2 Wi-Fi connected
+but internet unavailable</h2><blockquote>
+<p>☐ Check whether one or all devices on the SSID are affected.</p>
+<p>☐ Confirm correct SSID and whether a captive portal is required.</p>
+<p>☐ Inspect client addressing and test the gateway if permitted.</p>
+<p>☐ Test a remote IP and DNS name separately.</p>
+<p>☐ Check VPN/proxy settings and the router/AP uplink.</p>
+<p>☐ If multiple clients fail, investigate shared equipment, DNS, or ISP
+service.</p>
+</blockquote><h2 id="dhcp-or-wrong-ip-configuration">2.3 DHCP or wrong IP
+configuration</h2><blockquote>
+<p>☐ Inspect address, prefix/mask, gateway, DNS, DHCP status, and lease
+details.</p>
+<p>☐ Confirm link and VLAN before blaming the DHCP server.</p>
+<p>☐ Check scope exhaustion, exclusions, reservations, relay/IP helper,
+and server availability.</p>
+<p>☐ Renew the lease only when appropriate and compare before/after
+settings.</p>
+<p>☐ Avoid arbitrary static IPs; check the address plan and possible
+conflicts.</p>
+</blockquote><h2 id="website-fails-by-name">2.4 Website fails by name</h2><blockquote>
+<p>☐ Check spelling and service availability.</p>
+<p>☐ Use nslookup to inspect the result and answering DNS server.</p>
+<p>☐ Compare with an approved resolver or known-good device.</p>
+<p>☐ Check VPN DNS, local resolver settings, filtering, and records.</p>
+<p>☐ Clear local DNS cache only when stale cache is a plausible
+cause.</p>
+<p>☐ A raw-IP browser test may be invalid because HTTPS hosting often
+depends on the hostname.</p>
+</blockquote><h2 id="slow-or-intermittent-network">2.5 Slow or intermittent
+network</h2><blockquote>
+<p>☐ Record time, affected apps/devices, and whether wired devices are
+affected.</p>
+<p>☐ Separate latency, packet loss, throughput, and DNS delay.</p>
+<p>☐ Compare near the access point versus the usual location.</p>
+<p>☐ Inspect Wi-Fi interference, channel congestion, link speed,
+interface errors, and cables.</p>
+<p>☐ Check heavy transfers as a controlled comparison.</p>
+<p>☐ Treat ping/traceroute as clues; ICMP may be filtered or
+deprioritised.</p>
+</blockquote><h2 id="vlan-or-trunk-issue">2.6 VLAN or trunk issue</h2><blockquote>
+<p>☐ Confirm access-port VLAN and VLAN existence/active status.</p>
+<p>☐ Check trunk state and allowed VLAN list along the entire path.</p>
+<p>☐ Check native VLAN configuration when untagged traffic is
+involved.</p>
+<p>☐ Verify host IP/mask and expected gateway.</p>
+<p>☐ Confirm the SVI/router interface exists and is operational.</p>
+<p>☐ Then investigate routing, ACLs/firewalls, and return path.</p>
+</blockquote><h2 id="local-network-works-remote-networks-fail">2.7 Local network
+works; remote networks fail</h2><blockquote>
+<p>☐ Confirm the destination is off-subnet according to the host
+mask.</p>
+<p>☐ Inspect the default route and gateway.</p>
+<p>☐ Test gateway reachability and inspect router routes if
+authorised.</p>
+<p>☐ Check ACL/firewall policy, NAT where relevant, upstream routing,
+and return path.</p>
+<p>☐ Use traceroute as supporting evidence, not proof of the exact
+fault.</p>
+</blockquote><h2 id="a-service-port-appears-unreachable">2.8 A service port appears
+unreachable</h2><blockquote>
+<p>☐ Confirm the destination name/IP and expected service port.</p>
+<p>☐ Check whether the server is running and listening on that port.</p>
+<p>☐ Test network reachability and TCP port connectivity from an
+authorised client.</p>
+<p>☐ Check host firewall, network firewall, ACLs, NAT/port forwarding,
+and routing.</p>
+<p>☐ Confirm the application binds to the expected interface and
+protocol.</p>
+<p>☐ A successful TCP connection does not prove the application is
+healthy or secure.</p>
+</blockquote><h2 id="symptom-to-next-check-decision-table">2.9 Symptom-to-next-check
+decision table</h2><p class="escalation-note"><strong>Escalate when: </strong>impact is broad or increasing, a security incident is suspected, the fault involves shared infrastructure, the next action needs unapproved privileges/changes, or rollback is uncertain. Include scope, start time, evidence, tests and changes already attempted.</p><table><caption>2.9 Symptom-to-next-check decision table</caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Observation</strong></th>
+<th><strong>Prioritise checking</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No cable link / no Wi-Fi association</td>
+<td>Cable, NIC, power, radio, authentication, AP, switch port.</td>
+</tr>
+<tr class="even">
+<td>Link up but no valid address</td>
+<td>DHCP, VLAN, relay, scope, static configuration.</td>
+</tr>
+<tr class="odd">
+<td>Valid address but gateway unreachable</td>
+<td>Mask, local VLAN, ARP/neighbour resolution, port security, gateway
+interface, host firewall.</td>
+</tr>
+<tr class="even">
+<td>Gateway works but remote IP fails</td>
+<td>Routing, ACL/firewall, NAT, upstream link, remote service.</td>
+</tr>
+<tr class="odd">
+<td>Remote IP works but domain lookup fails</td>
+<td>DNS server, resolver configuration, DNS record, VPN
+DNS/filtering.</td>
+</tr>
+<tr class="even">
+<td>Only one application fails</td>
+<td>Service health, port/protocol, proxy, TLS/certificate, application
+or endpoint firewall.</td>
+</tr>
+<tr class="odd">
+<td>Only one VLAN is affected</td>
+<td>Access VLAN, trunk allowed list, SVI, routing, policy.</td>
+</tr>
+<tr class="even">
+<td>Works after moving to another port</td>
+<td>Original port configuration, VLAN, security policy, or physical
+fault.</td>
+</tr>
+</tbody>
+</table><table><caption>2.9 Symptom-to-next-check decision table (part 2)</caption>
+<colgroup>
+<col style="width: 100%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Interpret results carefully A failed ping does not prove a
+host is down; ICMP can be blocked. A successful ping does not prove the
+application port works. Test the specific layer or service in
+question.</strong></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table><h2 id="worked-troubleshooting-examples-and-self-check">2.10 Worked
+troubleshooting examples and self-check</h2><p>The outputs below are illustrative examples, not captured results.
+Real wording and available fields vary by operating system, device, and
+software version. Use only on systems you are authorised to
+troubleshoot.</p><h3 id="example-a-windows-has-a-169.254.x.x-address">Example A: Windows
+has a 169.254.x.x address</h3><p>Illustrative result: IPv4 Address . . . . . . . . . . : 169.254.23.8;
+Default Gateway . . . . . . . . . : (blank).</p><p>Interpretation: Windows commonly uses an IPv4 link-local address when
+it has not obtained a DHCP lease. Check link/Wi-Fi association, VLAN,
+DHCP scope, relay/IP helper, and DHCP server path. Do not conclude that
+the DHCP server itself is faulty until the link and VLAN path have been
+checked. A manually configured address is an exception to this clue.</p><h3 id="example-b-ip-connectivity-works-but-name-lookup-times-out">Example
+B: IP connectivity works but name lookup times out</h3><p>Illustrative tests: ping 192.168.10.1 returns replies; nslookup
+portal.example.test times out against the configured DNS server.</p><p>Interpretation: the gateway test suggests local IP connectivity is
+working, but ping can be filtered and does not prove every service
+works. The DNS timeout directs the next investigation toward the
+configured resolver, DNS server reachability, UDP/TCP 53 policy, VPN DNS
+settings, and resolver service. Do not replace the hostname with an IP
+in a browser as a definitive test: HTTPS certificates and virtual
+hosting commonly depend on the hostname.</p><h3 id="example-c-one-vlan-cannot-reach-another">Example C: One VLAN
+cannot reach another</h3><p>Check in order: client address and prefix → access VLAN → VLAN
+existence and trunk allowed list → SVI/router interface status → route
+and ACL/firewall policy → return path. If same-VLAN communication works
+but cross-VLAN communication fails, Layer 3 routing or policy becomes a
+stronger hypothesis, but verify the full path before changing
+configuration.</p><h3 id="self-check-questions">Self-check questions</h3><ol type="1">
+<li><p>A client has 169.254.8.4/16 and no gateway. Name two checks to
+perform before changing the address manually.</p></li>
+<li><p>A host can ping its gateway but cannot resolve a domain. Which
+service should you investigate next, and why is this not absolute proof
+of a DNS-only fault?</p></li>
+<li><p>Two hosts in the same VLAN communicate, but a host in another
+VLAN cannot reach them. Name three checks in a sensible order.</p></li>
+<li><p>Why is a failed ping not enough to conclude that a remote
+application is down?</p></li>
+<li><p>What should be recorded before and after a configuration
+change?</p></li>
+</ol><h3 id="answer-key">Answer key</h3><ul>
+<li><p>Check physical/Wi-Fi link and the expected VLAN; inspect DHCP
+lease/status, scope capacity, relay/IP helper, and server path.</p></li>
+<li><p>Check the configured DNS resolver and name-resolution path. A
+ping can be filtered, the DNS server may be unreachable, and other
+policies or application issues may coexist.</p></li>
+<li><p>Check the source host address/prefix, switch access VLAN and
+trunk path, then SVI/router interface and routing/ACL policy; verify the
+return path.</p></li>
+<li><p>ICMP may be filtered or deprioritised, while the application uses
+a different protocol/port. Test the actual service using an authorised
+method.</p></li>
+<li><p>Record symptoms, scope, baseline output, intended change,
+approval/rollback plan, commands/actions, verification results, and
+remaining issues.</p></li>
+</ul><h1 id="practical-tools-and-templates">3. Practical tools and
+templates</h1><h2 id="command-reference-windows">3.1 Command reference: Windows</h2><table><caption>3.1 Command reference: Windows</caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Command</strong></th>
+<th><strong>Purpose</strong></th>
+<th><strong>Interpretation note</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ipconfig /all</td>
+<td>View adapter addressing, DHCP, gateway, DNS, MAC address.</td>
+<td>Focus on the active interface, not disconnected adapters.</td>
+</tr>
+<tr class="even">
+<td>ipconfig /release</td>
+<td>Release DHCP lease.</td>
+<td>Can interrupt connectivity; use only when appropriate.</td>
+</tr>
+<tr class="odd">
+<td>ipconfig /renew</td>
+<td>Request DHCP lease.</td>
+<td>If it fails, record the error and inspect DHCP path.</td>
+</tr>
+<tr class="even">
+<td>ipconfig /flushdns</td>
+<td>Clear local DNS cache.</td>
+<td>Does not fix incorrect DNS server or bad authoritative records.</td>
+</tr>
+<tr class="odd">
+<td>ping &lt;IP-or-name&gt;</td>
+<td>Test ICMP reachability.</td>
+<td>Failure may be filtering; success does not test application
+port.</td>
+</tr>
+<tr class="even">
+<td>tracert &lt;host&gt;</td>
+<td>Show responding hops toward destination.</td>
+<td>Hops may be hidden or not respond.</td>
+</tr>
+<tr class="odd">
+<td>nslookup &lt;name&gt;</td>
+<td>Query DNS.</td>
+<td>Note which DNS server answered and the returned record.</td>
+</tr>
+<tr class="even">
+<td>arp -a</td>
+<td>View IPv4 ARP cache.</td>
+<td>Entries are local-link neighbour information.</td>
+</tr>
+<tr class="odd">
+<td>route print</td>
+<td>Show routing table.</td>
+<td>Look for default route and more-specific routes.</td>
+</tr>
+<tr class="even">
+<td>Get-NetIPConfiguration</td>
+<td>PowerShell IP summary.</td>
+<td>Useful for adapter and gateway checks.</td>
+</tr>
+<tr class="odd">
+<td>Test-NetConnection &lt;host&gt; -Port 443</td>
+<td>Test TCP reachability to a port.</td>
+<td>Not a full HTTP/TLS or application test.</td>
+</tr>
+<tr class="even">
+<td>netstat -ano</td>
+<td>View connections/listeners and process IDs.</td>
+<td>Use tasklist /fi "PID eq &lt;pid&gt;" to map PID where
+authorised.</td>
+</tr>
+</tbody>
+</table><h2 id="command-reference-linux">3.2 Command reference: Linux</h2><table><caption>3.2 Command reference: Linux</caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Command</strong></th>
+<th><strong>Purpose</strong></th>
+<th><strong>Note</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ip addr</td>
+<td>Interface addresses and state.</td>
+<td>Modern replacement for many ifconfig use cases.</td>
+</tr>
+<tr class="even">
+<td>ip link</td>
+<td>Link/interface state.</td>
+<td>Does not prove upstream connectivity.</td>
+</tr>
+<tr class="odd">
+<td>ip route</td>
+<td>Routing table.</td>
+<td>Check default route and next hop.</td>
+</tr>
+<tr class="even">
+<td>ip neigh</td>
+<td>Neighbour/ARP cache.</td>
+<td>IPv4 and IPv6 neighbour entries.</td>
+</tr>
+<tr class="odd">
+<td>ping &lt;host&gt;</td>
+<td>ICMP reachability.</td>
+<td>May need Ctrl+C to stop; permissions/options vary.</td>
+</tr>
+<tr class="even">
+<td>tracepath &lt;host&gt; or traceroute &lt;host&gt;</td>
+<td>Path diagnostic.</td>
+<td>Availability depends on installed packages and permissions.</td>
+</tr>
+<tr class="odd">
+<td>dig &lt;name&gt;</td>
+<td>DNS query details.</td>
+<td>Often more informative than nslookup if installed.</td>
+</tr>
+<tr class="even">
+<td>resolvectl status</td>
+<td>Resolver status on systemd-resolved systems.</td>
+<td>Not present on all Linux distributions.</td>
+</tr>
+<tr class="odd">
+<td>ss -tulpn</td>
+<td>Listening sockets and connections.</td>
+<td>Some process details may require elevated privileges.</td>
+</tr>
+<tr class="even">
+<td>curl -I https://example.com</td>
+<td>Inspect HTTP response headers.</td>
+<td>Tests HTTP(S) behaviour, not just ICMP.</td>
+</tr>
+</tbody>
+</table><h2 id="cisco-ios-ios-xe-read-only-checks">3.3 Cisco IOS / IOS XE
+read-only checks</h2><table><caption>3.3 Cisco IOS / IOS XE read-only checks</caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Command</strong></th>
+<th><strong>Useful for</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>show ip interface brief</td>
+<td>Interface IP and status overview.</td>
+</tr>
+<tr class="even">
+<td>show interfaces status</td>
+<td>Port state and basic port details on supported switches.</td>
+</tr>
+<tr class="odd">
+<td>show interfaces &lt;interface&gt;</td>
+<td>Counters, errors, speed/duplex, and operational details.</td>
+</tr>
+<tr class="even">
+<td>show vlan brief</td>
+<td>VLAN list and access-port membership.</td>
+</tr>
+<tr class="odd">
+<td>show interfaces trunk</td>
+<td>Trunk status and VLAN forwarding details.</td>
+</tr>
+<tr class="even">
+<td>show mac address-table</td>
+<td>Learned MAC addresses and associated ports.</td>
+</tr>
+<tr class="odd">
+<td>show ip route</td>
+<td>Routing table and route sources.</td>
+</tr>
+<tr class="even">
+<td>show ip arp</td>
+<td>IPv4 ARP entries on supported devices.</td>
+</tr>
+<tr class="odd">
+<td>show running-config</td>
+<td>Current active configuration; protect output.</td>
+</tr>
+<tr class="even">
+<td>show cdp neighbors detail</td>
+<td>Cisco neighbour discovery if CDP is enabled.</td>
+</tr>
+<tr class="odd">
+<td>show lldp neighbors detail</td>
+<td>LLDP neighbour discovery if enabled.</td>
+</tr>
+<tr class="even">
+<td>show spanning-tree</td>
+<td>Spanning Tree state; exact options vary by platform.</td>
+</tr>
+</tbody>
+</table><table><caption>3.3 Cisco IOS / IOS XE read-only checks (part 2)</caption>
+<colgroup>
+<col style="width: 100%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Command safety Start with read-only commands. Configuration
+commands can disconnect users or lock out management. Confirm device,
+interface, change scope, backup, rollback plan, and authorisation before
+making changes.</strong></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table><h2 id="ip-addressing-plan-template">3.4 IP addressing plan
+template</h2><table><caption>3.4 IP addressing plan template</caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Field</strong></th>
+<th><strong>Value to record</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Site / purpose</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>VLAN ID / name</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Network CIDR</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Subnet mask</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Gateway / SVI</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DHCP range</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Excluded / reserved addresses</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DNS servers / search suffix</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Static infrastructure addresses</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Routing / ACL notes</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Owner / review date</td>
+<td></td>
+</tr>
+</tbody>
+</table><h2 id="network-inventory-template">3.5 Network inventory template</h2><table><caption>3.5 Network inventory template</caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Field</strong></th>
+<th><strong>Value to record</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hostname / role</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Manufacturer / model</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Location / owner</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Management IP / prefix</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Default gateway / management VLAN</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Software / firmware version</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Interfaces / connected neighbour</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Critical dependencies</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Configuration backup location / date</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Support / warranty / change record</td>
+<td></td>
+</tr>
+</tbody>
+</table><h2 id="configuration-review-checklists">3.6 Configuration review
+checklists</h2><h3 id="switch-access-port">Switch access port</h3><blockquote>
+<p>☐ Correct physical port and endpoint confirmed.</p>
+<p>☐ Port enabled and link state understood.</p>
+<p>☐ Correct access VLAN assigned and VLAN exists.</p>
+<p>☐ Port security / authentication / edge protections match policy.</p>
+<p>☐ Speed/duplex and errors checked if link is unstable.</p>
+<p>☐ No unintended trunk configuration.</p>
+<p>☐ Configuration saved according to lab/change policy.</p>
+<p>☐ Connectivity verified and change documented.</p>
+</blockquote><h3 id="q-trunk">802.1Q trunk</h3><blockquote>
+<p>☐ Both ends intended to operate as trunks.</p>
+<p>☐ Trunk operational state confirmed.</p>
+<p>☐ Required VLANs exist and are allowed end-to-end.</p>
+<p>☐ Native VLAN handling matches at both ends where applicable.</p>
+<p>☐ Encapsulation and platform-specific settings verified.</p>
+<p>☐ Spanning Tree state checked.</p>
+<p>☐ Management reachability and rollback plan confirmed.</p>
+</blockquote><h3 id="router-layer-3-interface">Router / Layer 3 interface</h3><blockquote>
+<p>☐ Correct interface, address, and prefix.</p>
+<p>☐ Interface administrative and operational state checked.</p>
+<p>☐ Connected route appears as expected.</p>
+<p>☐ Required routes/default route exist.</p>
+<p>☐ Next-hop reachability checked.</p>
+<p>☐ ACL/firewall policy reviewed in both directions.</p>
+<p>☐ Return path and NAT requirements considered.</p>
+<p>☐ Connectivity verified from relevant source networks.</p>
+</blockquote><h3 id="dhcp-scope">DHCP scope</h3><blockquote>
+<p>☐ Correct subnet and mask.</p>
+<p>☐ Pool range excludes network, broadcast, gateway, and reserved
+static addresses.</p>
+<p>☐ No unintended overlap with another pool or site.</p>
+<p>☐ Default gateway and DNS options are correct.</p>
+<p>☐ Scope has capacity and lease settings are appropriate.</p>
+<p>☐ DHCP relay/IP helper and server path verified where needed.</p>
+<p>☐ A client lease was tested and documented.</p>
+</blockquote><h3 id="dns-change">DNS change</h3><blockquote>
+<p>☐ Correct zone and record name/type.</p>
+<p>☐ Target value verified with the service owner.</p>
+<p>☐ TTL and propagation expectations understood.</p>
+<p>☐ Existing record and rollback value recorded.</p>
+<p>☐ Authoritative and recursive answers checked as appropriate.</p>
+<p>☐ Application tested by hostname after change.</p>
+</blockquote><h3 id="firewall-acl-rule-review">Firewall / ACL rule review</h3><blockquote>
+<p>☐ Business purpose and owner identified.</p>
+<p>☐ Source, destination, protocol, and ports are as narrow as
+practical.</p>
+<p>☐ Direction, rule order, statefulness, and implicit deny
+considered.</p>
+<p>☐ Logging and expiry/review date set where appropriate.</p>
+<p>☐ No broad any-to-any access without justified approval.</p>
+<p>☐ Test plan, rollback, and post-change verification recorded.</p>
+</blockquote><h2 id="change-record-template">3.7 Change record template</h2><table><caption>3.7 Change record template</caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Field</strong></th>
+<th><strong>Record</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Change ID / owner / date</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Reason and expected outcome</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Affected devices, users, and services</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Pre-change state / backup</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Planned steps</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Risk and impact</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Validation tests</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Rollback trigger and steps</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Actual result / verification</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Follow-up / documentation update</td>
+<td></td>
+</tr>
+</tbody>
+</table><h2 id="subnet-calculator-logic">3.8 Subnet calculator logic</h2><p>For IPv4, a prefix /n means n network bits and 32−n host bits. For a
+conventional subnet, total addresses = 2^(32−n); usable hosts are
+usually total−2, except special cases such as /31 point-to-point links
+and /32 host routes.</p><table><caption>3.8 Subnet calculator logic</caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Input</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>IPv4 address</td>
+<td>192.168.10.77</td>
+</tr>
+<tr class="even">
+<td>Prefix</td>
+<td>/26</td>
+</tr>
+<tr class="odd">
+<td>Network address</td>
+<td>192.168.10.64</td>
+</tr>
+<tr class="even">
+<td>Broadcast address</td>
+<td>192.168.10.127</td>
+</tr>
+<tr class="odd">
+<td>First / last host</td>
+<td>192.168.10.65 / 192.168.10.126</td>
+</tr>
+<tr class="even">
+<td>Total / conventional usable</td>
+<td>64 / 62</td>
+</tr>
+</tbody>
+</table><blockquote>
+<p>• For real network planning, validate input format and prefix range
+(IPv4 prefix 0–32).</p>
+<p>• Check that a proposed gateway lies inside the subnet and is not the
+network or broadcast address for conventional subnets.</p>
+<p>• Check overlap against existing routes, VPNs, cloud VPC/VNets, and
+remote sites.</p>
+<p>• Do not trust a calculator output without understanding whether it
+treats /31 and /32 specially.</p>
+</blockquote><h1 id="concept-and-protocol-reference">4. Concept and protocol
+reference</h1><h2 id="ip-addressing-and-subnetting">IP addressing and subnetting</h2><p><strong>Function:</strong> Gives interfaces logical addresses and
+defines which destinations are local versus routed.</p><p><strong>Related systems:</strong> IPv4/IPv6, subnet masks/prefixes,
+gateways, routes, DHCP.</p><p><strong>Remember:</strong> The mask/prefix affects the host’s
+local-versus-remote decision.</p><h2 id="ethernet-switching">Ethernet switching</h2><p><strong>Function:</strong> Moves frames inside a Layer 2 network
+using MAC learning and VLAN context.</p><p><strong>Related systems:</strong> MAC address table, access ports,
+trunks, STP, ARP.</p><p><strong>Remember:</strong> A switch does not automatically route
+between VLANs.</p><h2 id="routing">Routing</h2><p><strong>Function:</strong> Chooses a path for packets between IP
+networks.</p><p><strong>Related systems:</strong> Routing table,
+connected/static/dynamic routes, next hop, longest-prefix match.</p><p><strong>Remember:</strong> Forward path and return path both
+matter.</p><h2 id="arp-and-ipv6-ndp">ARP and IPv6 NDP</h2><p><strong>Function:</strong> Discover local-link neighbours for packet
+delivery.</p><p><strong>Related systems:</strong> ARP for IPv4; ICMPv6 Neighbor
+Discovery for IPv6.</p><p><strong>Remember:</strong> For a remote IPv4 host, a client normally
+resolves the gateway’s MAC—not the remote host’s MAC.</p><h2 id="tcp-and-udp">TCP and UDP</h2><p><strong>Function:</strong> Transport application data between process
+endpoints.</p><p><strong>Related systems:</strong> Ports, sockets, TCP
+handshake/retransmission, UDP datagrams.</p><p><strong>Remember:</strong> Port reachability is not the same as
+application health.</p><h2 id="vlans-and-trunks">VLANs and trunks</h2><p><strong>Function:</strong> Separate Layer 2 broadcast domains and
+carry VLAN traffic between switches.</p><p><strong>Related systems:</strong> 802.1Q tags, access ports, native
+VLAN, SVIs, inter-VLAN routing.</p><p><strong>Remember:</strong> VLANs are logical segmentation, not a
+complete security boundary by themselves.</p><h2 id="natpat">NAT/PAT</h2><p><strong>Function:</strong> Translates addresses and often ports
+between address domains.</p><p><strong>Related systems:</strong> Private/public IPv4, connection
+tracking, port forwarding.</p><p><strong>Remember:</strong> NAT is not encryption and does not replace
+firewall policy.</p><h2 id="firewalls-and-acls">Firewalls and ACLs</h2><p><strong>Function:</strong> Enforce traffic policy based on rules and
+connection context.</p><p><strong>Related systems:</strong> Stateful inspection,
+source/destination, protocol, port, rule order, logs.</p><p><strong>Remember:</strong> A rule should be least-privilege,
+documented, and tested.</p><h2 id="vpn">VPN</h2><p><strong>Function:</strong> Creates an encrypted or otherwise
+protected logical connection across another network, depending on VPN
+type.</p><p><strong>Related systems:</strong> IPsec, TLS-based VPNs, routes, DNS,
+identity and MFA.</p><p><strong>Remember:</strong> A connected VPN can still have incorrect
+routes or DNS.</p><h2 id="network-monitoring">Network monitoring</h2><p><strong>Function:</strong> Collects telemetry and logs to show
+health, trends, and faults.</p><p><strong>Related systems:</strong> SNMP, syslog, flow records,
+metrics, alerts, time synchronisation.</p><p><strong>Remember:</strong> Good monitoring needs baselines and
+actionable alerts, not just data volume.</p><h2 id="cloud-vpcvnet">Cloud VPC/VNet</h2><p><strong>Function:</strong> A logically isolated cloud network
+containing address ranges, subnets, routes, and controls.</p><p><strong>Related systems:</strong> Route tables, internet/NAT
+gateways, security groups/NSGs, peering, VPN/direct links.</p><p><strong>Remember:</strong> Cloud subnets are often availability-zone
+scoped or provider-specific; read the cloud provider docs.</p><h2 id="tls-and-certificates">TLS and certificates</h2><p><strong>Function:</strong> Protects data in transit and can
+authenticate server identity.</p><p><strong>Related systems:</strong> Certificate chain, hostname,
+expiry, trust store, protocol/cipher configuration.</p><p><strong>Remember:</strong> A certificate can be valid yet not match
+the hostname being accessed.</p><h2 id="redundancy-and-loops">Redundancy and loops</h2><p><strong>Function:</strong> Redundancy provides alternate paths; loop
+prevention stops Layer 2 frames circulating indefinitely.</p><p><strong>Related systems:</strong> STP/RSTP, link aggregation, routing
+convergence, failover.</p><p><strong>Remember:</strong> Redundant links must be designed and
+configured deliberately.</p><h2 id="worked-example-how-a-host-reaches-a-website">Worked example: how
+a host reaches a website</h2><p>Example network: client 192.168.10.77/26, default gateway
+192.168.10.65, and a website hostname that resolves to a remote IP
+address. This is a conceptual example; the actual path depends on DNS,
+routing, firewalls, and the service design.</p><ol start="6" type="1">
+<li><p>The client checks the destination against its own IPv4 prefix. If
+the destination is outside 192.168.10.64/26, it sends the packet to its
+default gateway.</p></li>
+<li><p>If the gateway MAC address is not already cached, the client uses
+ARP to learn the local-link MAC address for 192.168.10.65. It does not
+ARP for the remote website server across the internet.</p></li>
+<li><p>The client sends an Ethernet frame to the gateway MAC. The IP
+packet still has the remote server as its destination; the router
+examines the destination IP and selects a route.</p></li>
+<li><p>DNS resolution is a separate dependency: the client or its
+resolver must obtain an appropriate record. A cached answer may mean no
+new DNS query is needed.</p></li>
+<li><p>Routers and security devices forward or filter traffic according
+to routes and policy. Replies also need a valid return path. HTTPS
+additionally depends on successful TLS negotiation and the correct
+hostname/certificate.</p></li>
+</ol><p>Key distinction: Ethernet source/destination MAC addresses are
+local-link delivery information and may change at each routed hop; the
+IP source/destination generally remain end-to-end unless NAT or another
+translation changes them.</p><h1 id="advanced-and-ccna-focused-reference">5. Advanced and
+CCNA-focused reference</h1><p>These modules add the switching, routing, security, and automation
+topics that commonly appear in CCNA-level study. Practise in a simulator
+or authorised lab before using commands on production equipment.</p><h2 id="spanning-tree-protocol-stprstp">5.1 Spanning Tree Protocol
+(STP/RSTP)</h2><p>Spanning Tree prevents Layer 2 loops when redundant switch links
+exist. Switches exchange BPDUs and select a root bridge; other switches
+choose paths toward that root. RSTP converges faster than classic STP in
+typical supported designs.</p><ul>
+<li><p>Root bridge: the switch selected as the reference point for the
+spanning-tree topology. Lower bridge ID wins; priority is considered
+before MAC address.</p></li>
+<li><p>Root port: the best path from a non-root switch toward the root
+bridge.</p></li>
+<li><p>Designated port: the forwarding port selected for a network
+segment.</p></li>
+<li><p>PortFast is intended for edge/access ports connected to end
+devices, not switch-to-switch links. BPDU Guard can disable an edge port
+if it receives a BPDU; apply according to the network design.</p></li>
+</ul><p>Useful verification: show spanning-tree, show spanning-tree vlan
+&lt;vlan-id&gt;, show interfaces status. Confirm the root bridge, port
+roles/states, and whether the observed topology matches the intended
+design.</p><h2 id="etherchannel-and-link-aggregation">5.2 EtherChannel and link
+aggregation</h2><p>EtherChannel groups compatible physical links into one logical link.
+LACP is a standards-based negotiation protocol; PAgP is
+Cisco-proprietary. The member links must have compatible settings,
+including speed/duplex where applicable, access/trunk mode, VLAN
+settings, and channel parameters.</p><p>Useful verification: show etherchannel summary, show interfaces
+port-channel, show interfaces trunk. If a member is suspended or
+excluded, compare its configuration with the other members and inspect
+the negotiation state.</p><h2 id="routing-decisions-and-ospf-fundamentals">5.3 Routing decisions
+and OSPF fundamentals</h2><p>A router first chooses the most specific matching route
+(longest-prefix match). When competing routes have the same prefix
+length, route source preference and metric help determine the selected
+route. A default route is used when no more-specific match exists.</p><p>OSPF is a link-state interior gateway protocol. Routers form
+neighbour adjacencies, exchange link-state information, and calculate
+shortest paths. In a simple CCNA lab, begin with OSPFv2 in a single
+area, commonly area 0; learn neighbour formation and advertised networks
+before adding complexity.</p><p>Useful verification: show ip route, show ip protocols, show ip ospf
+neighbor, show ip ospf interface, show ip route ospf. Check interface
+addressing, area settings, network statements or interface-level OSPF
+settings, timers/authentication where configured, and whether the
+expected routes are installed.</p><h2 id="ipv6-addressing-and-neighbour-discovery">5.4 IPv6 addressing and
+neighbour discovery</h2><p>IPv6 uses 128-bit addresses. Learn global unicast, link-local, unique
+local, multicast, and loopback addresses. Link-local addresses are used
+on the local link and are not routed across routers. IPv6 uses Neighbor
+Discovery Protocol (NDP), rather than ARP, for neighbour discovery and
+related local-link functions.</p><ul>
+<li><p>SLAAC allows a host to form its own address using router
+advertisements; DHCPv6 can provide additional or managed addressing
+information depending on the design.</p></li>
+<li><p>A default route and correct Layer 3 reachability still matter; an
+assigned IPv6 address alone does not prove end-to-end
+connectivity.</p></li>
+<li><p>Useful verification: show ipv6 interface brief, show ipv6 route,
+ping, and traceroute/tracert with IPv6-aware options where
+supported.</p></li>
+</ul><h2 id="acls-natpat-and-device-security">5.5 ACLs, NAT/PAT, and device
+security</h2><p>Access control lists are evaluated in order, with the first matching
+entry determining the result; an implicit deny exists at the end of an
+ACL. Standard IPv4 ACLs primarily match source IPv4 addresses; extended
+ACLs can match protocol, source/destination addresses, and ports.
+Placement depends on the policy and traffic direction.</p><p>NAT translates addresses; PAT allows multiple internal sessions to
+share an outside address by tracking transport-layer ports. Do not
+assume NAT itself is a security policy or firewall. Confirm
+translations, routes, ACLs, and return traffic separately.</p><p>Useful verification: show access-lists, show ip interface, show ip
+nat translations, show ip nat statistics, show running-config sections
+relevant to the feature. For device management, prefer SSH over Telnet,
+use individual accounts/AAA where appropriate, and restrict management
+access.</p><h2 id="first-hop-redundancy-and-resilient-design">5.6 First-hop
+redundancy and resilient design</h2><p>First-hop redundancy protocols provide a virtual default-gateway
+address that can remain available if one gateway device fails. HSRP is a
+common Cisco example; VRRP is an open standard. Redundancy improves
+availability only when the failure modes, tracking, Layer 2 path, and
+upstream routing are designed and tested correctly.</p><p>When troubleshooting, verify the active/standby state, virtual IP,
+interface status, tracking configuration, and whether clients are using
+the intended default gateway. Avoid making changes during a live
+incident without an approved plan.</p><h2 id="wireless-network-access-and-automation">5.7 Wireless, network
+access, and automation</h2><p>For enterprise wireless, distinguish the client, access point,
+wireless LAN controller (where used), SSID, authentication method, VLAN
+mapping, and wired uplink. A client can associate to Wi-Fi yet fail to
+obtain an address or reach services because later stages are broken.</p><p>Common access-layer protections include port security, DHCP snooping,
+Dynamic ARP Inspection, and BPDU Guard. Each has prerequisites and can
+interrupt legitimate traffic if deployed incorrectly; learn the threat
+addressed, trust boundaries, and verification commands before enabling
+it.</p><p>Network automation fundamentals include structured data such as JSON,
+REST APIs, controller-based management, and configuration templates.
+Automation reduces repetitive work but can also repeat a mistake
+quickly; use version control, test environments, least privilege, and
+reviewable change plans.</p><h2 id="ccna-style-troubleshooting-command-map">5.8 CCNA-style
+troubleshooting command map</h2><table><caption>5.8 CCNA-style troubleshooting command map</caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Useful starting checks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Are interfaces and addressing correct?</td>
+<td>show ip interface brief; show interfaces; show ipv6 interface
+brief</td>
+</tr>
+<tr class="even">
+<td>Is the switchport in the intended VLAN?</td>
+<td>show vlan brief; show interfaces switchport; show interfaces
+trunk</td>
+</tr>
+<tr class="odd">
+<td>Is Layer 2 loop prevention behaving as expected?</td>
+<td>show spanning-tree; show etherchannel summary</td>
+</tr>
+<tr class="even">
+<td>Does the route exist and is it selected?</td>
+<td>show ip route; show ipv6 route; show ip protocols</td>
+</tr>
+<tr class="odd">
+<td>Is OSPF forming neighbours and installing routes?</td>
+<td>show ip ospf neighbor; show ip route ospf</td>
+</tr>
+<tr class="even">
+<td>Is policy or translation affecting traffic?</td>
+<td>show access-lists; show ip nat translations; inspect interface
+direction and return path</td>
+</tr>
+<tr class="odd">
+<td>Can the endpoint reach the next hop and destination?</td>
+<td>ping; traceroute/tracert; compare tests from different points</td>
+</tr>
+</tbody>
+</table><p>Use show commands first when possible. Save relevant output, compare
+the expected and actual state, and make one controlled change at a time.
+Command availability varies by platform and software version.</p><h2 id="infrastructure-connectivity-device-discovery-and-physical-media">5.9
+Infrastructure connectivity, device discovery, and physical media</h2><p>For CCNA v2.0, practise diagnosing copper/fibre media, interface
+errors, speed/duplex mismatches, signal levels, distance limits, and
+physical port state. Use show interfaces and show logging, then compare
+counters and link status with a known-good path. Do not clear counters
+or change speed/duplex on a production link without an approved
+plan.</p><p>CDP and LLDP help identify directly connected devices and validate
+network documentation. They are discovery tools, not proof that the full
+end-to-end path is healthy. Support and command syntax vary by
+platform.</p><p>Also understand PoE, SVI operational state, hypervisors, virtual
+machines, containers, and the difference between standalone access
+points and controller-managed wireless. Check the device and platform
+documentation for supported features.</p><h2 id="network-services-management-and-layer-2-security">5.10 Network
+services, management, and Layer 2 security</h2><p>The v2.0 blueprint includes local usernames and AAA clients using
+TACACS+ or RADIUS, secure file transfer with SFTP/SCP, DNS record
+troubleshooting, IPsec VPN concepts, IPv4 ACLs, NAT/PAT, and SNMP/syslog
+interpretation. Learn what each control or service does, what evidence
+it provides, and how to verify it safely.</p><p>Layer 2 protections include DHCP snooping, Dynamic ARP Inspection,
+storm control, RA Guard, port security, and BPDU Guard. These features
+have trust-boundary and platform prerequisites; a mistaken configuration
+can block legitimate clients. Practise in a simulator or authorised lab
+and verify the operational state before applying them elsewhere.</p><p>For routing, include static, default, host, and floating static
+routes; OSPFv2 and OSPFv3 single-area concepts; neighbour formation;
+broadcast DR/BDR selection; router IDs; and HSRP/VRRP operational
+states. Use the current blueprint to determine the expected depth.</p><h2 id="ai-assisted-operations-and-ccna-v2.0-coverage-map">5.11
+AI-assisted operations and CCNA v2.0 coverage map</h2><p>The published v2.0 blueprint is a forward-looking study map at this review date; candidates sitting before 3 February 2027 should also consult the v1.1 blueprint. Topic names and weights can change, so verify the current official exam page before planning revision.</p><table><caption>5.11 AI-assisted operations and CCNA v2.0 coverage map</caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Official v2.0 domain</th>
+<th>Related material in this edition</th>
+<th>Coverage status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Network Infrastructure and Connectivity</td>
+<td>Addressing/subnetting, IPv6, client troubleshooting, wireless,
+virtualisation, DHCP, physical media (5.4, 5.9)</td>
+<td>Partial — add hands-on client and media troubleshooting labs</td>
+</tr>
+<tr class="even">
+<td>2. Switching and Network Access</td>
+<td>VLANs/trunks, SVI, EtherChannel/LACP, STP/RSTP, CDP/LLDP, port
+security (5.1, 5.2, 5.9, 5.10)</td>
+<td>Partial — configuration and output interpretation practice
+required</td>
+</tr>
+<tr class="odd">
+<td>3. IP Routing</td>
+<td>Routing table interpretation, static routes, OSPFv2/v3, HSRP/VRRP
+(5.3, 5.4, 5.10)</td>
+<td>Partial — add full routing labs and route-selection exercises</td>
+</tr>
+<tr class="even">
+<td>4. Network Services and Security</td>
+<td>DNS, NAT/PAT, ACLs, AAA, SFTP/SCP, VPN, Layer 2 protections (5.5,
+5.10)</td>
+<td>Partial — several objectives need configuration and verification
+labs</td>
+</tr>
+<tr class="odd">
+<td>5. AI, and Network Operations and Management</td>
+<td>Automation, APIs/JSON, SNMP, syslog, agentic AI and
+prompt/data-handling concepts (5.7, 5.8, 5.10)</td>
+<td>Partial — add safe Ansible practice and AI-output evaluation
+exercises</td>
+</tr>
+</tbody>
+</table><p>AI safety note: do not submit credentials, customer data, internal IP
+plans, logs containing personal information, or confidential
+configurations to an unapproved AI service. Treat AI-generated commands
+and diagnoses as untrusted suggestions; validate them against official
+documentation and lab results before use.</p><p>Official exam topics:
+https://learningcontent.cisco.com/documents/marketing/exam-topics/200-301_CCNA_v2.0_Exam_Topics_PDF.pdf</p><h1 id="trusted-learning-and-tool-directory">6. Trusted learning and
+tool directory</h1><h2 id="structured-learning-and-certification">6.1 Structured learning
+and certification</h2><p><strong>Cisco Networking Academy —</strong> Introductory and
+career-aligned networking courses and learning pathways.
+https://www.netacad.com/</p><p><strong>Cisco Skills for All —</strong> Free, self-paced IT,
+networking, cybersecurity, and career content where available.
+https://skillsforall.com/</p><p><strong>Cisco Certifications —</strong> Official certification
+tracks, exam topics, and candidate information.
+https://www.cisco.com/site/us/en/learn/training-certifications/certifications/index.html</p><p><strong>CompTIA Network+ —</strong> Vendor-neutral networking
+certification objectives and study information.
+https://www.comptia.org/certifications/network</p><p><strong>Juniper Open Learning —</strong> Training and certification
+learning resources for Juniper technologies.
+https://learningportal.juniper.net/</p><p><strong>Fortinet Training Institute —</strong> Network security and
+Fortinet product training. https://training.fortinet.com/</p><p><strong>Microsoft Learn —</strong> Official Microsoft technical
+learning paths, including Windows networking and Azure.
+https://learn.microsoft.com/</p><p><strong>AWS Skill Builder —</strong> AWS cloud training and
+certification preparation. https://skillbuilder.aws/</p><p><strong>Google Cloud Skills Boost —</strong> Google Cloud learning
+paths and hands-on labs; some content may be paid.
+https://www.cloudskillsboost.google/</p><p><strong>Red Hat Training —</strong> Linux and enterprise
+infrastructure learning resources.
+https://www.redhat.com/en/services/training-and-certification</p><h2 id="vendor-documentation-and-technical-references">6.2 Vendor
+documentation and technical references</h2><p><strong>Cisco Documentation —</strong> Official configuration guides,
+command references, release notes, and platform support.
+https://www.cisco.com/c/en/us/support/index.html</p><p><strong>Cisco Command References —</strong> Find exact command syntax
+and supported options for Cisco platforms.
+https://www.cisco.com/c/en/us/support/all-products.html</p><p><strong>Microsoft Learn: Networking —</strong> Windows Server,
+Windows client, Azure networking, and troubleshooting documentation.
+https://learn.microsoft.com/en-us/</p><p><strong>AWS Networking and Content Delivery —</strong> VPC, routing,
+connectivity, DNS, load balancing, and network security docs.
+https://docs.aws.amazon.com/</p><p><strong>Azure Architecture Center —</strong> Reference architectures
+and design guidance for Azure networking and infrastructure.
+https://learn.microsoft.com/en-us/azure/architecture/</p><p><strong>Google Cloud networking docs —</strong> VPC, routes, firewall
+policies, hybrid connectivity, and load balancing.
+https://cloud.google.com/networking/docs</p><p><strong>Juniper TechLibrary —</strong> Official Juniper product and
+configuration documentation. https://www.juniper.net/documentation/</p><p><strong>Aruba Networking documentation —</strong> Official wireless
+and switching product documentation.
+https://www.arubanetworks.com/techdocs/</p><p><strong>Ubiquiti Help Center —</strong> Guides for UniFi networking
+and related products. https://help.ui.com/</p><p><strong>Linux man-pages —</strong> Reference pages for Linux system
+calls and utilities. https://man7.org/linux/man-pages/</p><p><strong>Microsoft Sysinternals —</strong> Windows troubleshooting and
+administration utilities.
+https://learn.microsoft.com/en-us/sysinternals/</p><h2 id="standards-protocols-and-registries">6.3 Standards, protocols,
+and registries</h2><p>RFC Editor — Published RFCs covering Internet protocols, standards,
+and informational documents. https://www.rfc-editor.org/ Specific
+examples: RFC 1918 private IPv4 address allocation
+(https://www.rfc-editor.org/rfc/rfc1918.html); RFC 3021 /31 prefixes on
+IPv4 point-to-point links
+(https://www.rfc-editor.org/rfc/rfc3021.html).</p><p><strong>IETF —</strong> Internet standards development, working
+groups, and standards process. https://www.ietf.org/</p><p><strong>IANA Protocol Registries —</strong> Authoritative protocol
+numbers, service names, port numbers, and parameters.
+https://www.iana.org/protocols</p><p><strong>IEEE 802 —</strong> LAN/MAN standards family including
+Ethernet and Wi-Fi; full standards may require access.
+https://www.ieee802.org/</p><p><strong>RIPE NCC Academy —</strong> Internet number resources,
+routing, IPv6, and operational learning. https://academy.ripe.net/</p><p><strong>APNIC Academy —</strong> Internet infrastructure, routing,
+IPv6, and network operator training for the Asia-Pacific region.
+https://academy.apnic.net/</p><p><strong>ICANN Learn —</strong> DNS, domain names, and internet
+governance learning resources. https://learn.icann.org/</p><h2 id="simulators-packet-analysis-and-diagnostic-tools">6.4 Simulators,
+packet analysis, and diagnostic tools</h2><p><strong>Cisco Packet Tracer —</strong> Network simulation for
+building topologies and practising Cisco-style configurations.
+https://www.netacad.com/courses/getting-started-cisco-packet-tracer/</p><p><strong>Wireshark —</strong> Packet capture and protocol analysis
+software with documentation and display-filter references.
+https://www.wireshark.org/</p><p><strong>Wireshark User Guide —</strong> Official guide to capture,
+display filters, protocol dissection, and analysis.
+https://www.wireshark.org/docs/wsug_html_chunked/</p><p><strong>GNS3 —</strong> Network emulation platform; images for
+commercial devices may require separate licensing.
+https://www.gns3.com/</p><p><strong>EVE-NG —</strong> Multi-vendor network emulation platform;
+check edition and image licensing requirements.
+https://www.eve-ng.net/</p><p><strong>Nmap —</strong> Network discovery and security auditing tool;
+use only with explicit authorisation. https://nmap.org/</p><p><strong>iPerf3 —</strong> Measures TCP/UDP throughput between
+endpoints. https://iperf.fr/</p><p><strong>Speedtest by Ookla —</strong> Measures internet connection
+performance; results depend on server and conditions.
+https://www.speedtest.net/</p><p><strong>MTR —</strong> Combines route tracing and repeated
+measurements on supported systems. https://www.bitwizard.nl/mtr/</p><p><strong>PingPlotter —</strong> Visualises latency and packet-loss
+observations; product features/pricing vary.
+https://www.pingplotter.com/</p><p><strong>SubnetOnline —</strong> Browser-based subnetting and IP
+tools; verify results for unusual prefixes.
+https://www.subnetonline.com/</p><p><strong>IPcalc —</strong> IP address and subnet calculation utility;
+implementations vary. https://jodies.de/ipcalc</p><h2 id="quick-tool-finder-choose-by-task">Quick tool finder: choose by
+task</h2><table><caption>Quick tool finder: choose by task</caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>If you need to…</strong></th>
+<th><strong>Try this first</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Build a network visually</td>
+<td>Packet Tracer or NetSim</td>
+</tr>
+<tr class="even">
+<td>Inspect real packets</td>
+<td>Wireshark</td>
+</tr>
+<tr class="odd">
+<td>Practise binary/subnetting</td>
+<td>Cisco Binary Game or SubnettingPractice.com</td>
+</tr>
+<tr class="even">
+<td>Check DNS</td>
+<td>Google Admin Toolbox Dig or DNSViz</td>
+</tr>
+<tr class="odd">
+<td>Test a port</td>
+<td>PortQry or curl</td>
+</tr>
+<tr class="even">
+<td>Measure throughput</td>
+<td>iPerf3</td>
+</tr>
+<tr class="odd">
+<td>Explore a route/latency</td>
+<td>MTR or PingPlotter</td>
+</tr>
+<tr class="even">
+<td>Draw a topology</td>
+<td>diagrams.net</td>
+</tr>
+<tr class="odd">
+<td>Practise terminal commands safely</td>
+<td>Linuxlab or Shellschool</td>
+</tr>
+<tr class="even">
+<td>Explore cloud network paths</td>
+<td>SimAWS, then the cloud vendor’s official diagnostics</td>
+</tr>
+</tbody>
+</table><p>Use one tool at a time. Start with the free/simple option, check its
+limits, and return to the cheat sheets when you need a definition or
+command.</p><h2 id="a-network-simulators-and-virtual-labs">6.4A Network simulators
+and virtual labs</h2><blockquote>
+<p>• <a href="https://skillsforall.com/resources/lab-downloads"><u>Cisco
+Packet Tracer</u></a> — Build a visual network and practise switching,
+VLANs, addressing, routing, DHCP, DNS, and packet flow. Free; Cisco
+account/sign-in may be required.
+https://skillsforall.com/resources/lab-downloads</p>
+<p>• <a href="https://www.netacad.com/courses/getting-started-cisco-packet-tracer/1000"><u>Cisco
+Packet Tracer: Getting Started</u></a> — Short official introduction to
+the interface and first network. Free self-paced course.
+https://www.netacad.com/courses/getting-started-cisco-packet-tracer/1000</p>
+<p>• <a href="https://netsim.borck.education/"><u>NetSim</u></a> —
+Browser-based network simulator with command-style configuration and
+animated traffic. Useful for seeing how packets move between hosts and
+devices. https://netsim.borck.education/</p>
+<p>• <a href="https://www.filius.org/"><u>Filius</u></a> — Desktop
+simulator for basic networks, services, and data exchange; useful for
+visualising client/server behaviour. https://www.filius.org/</p>
+<p>• <a href="https://www.gns3.com/"><u>GNS3</u></a> — Emulate more
+realistic network topologies. Setup is more involved; device images may
+require separate licensing. https://www.gns3.com/</p>
+<p>• <a href="https://docs.gns3.com/"><u>GNS3 documentation</u></a>
+— Official setup and lab guides for GNS3.
+https://docs.gns3.com/</p>
+<p>• <a href="https://www.eve-ng.net/"><u>EVE-NG</u></a> — Multi-vendor
+virtual lab environment; best once basic concepts and computer resources
+are comfortable. https://www.eve-ng.net/</p>
+<p>• <a href="https://developer.cisco.com/modeling-labs/"><u>Cisco
+Modeling Labs</u></a> — Cisco virtual network lab environment. Check
+current edition, access, and image licensing terms.
+https://developer.cisco.com/modeling-labs/</p>
+</blockquote><h2 id="b-packet-capture-and-protocol-inspection">6.4B Packet capture
+and protocol inspection</h2><blockquote>
+<p>• <a href="https://www.wireshark.org/"><u>Wireshark</u></a> — Free,
+open-source packet analyser. Inspect DNS, DHCP, ARP, TCP handshakes,
+ICMP, and other protocols. https://www.wireshark.org/</p>
+<p>• <a href="https://www.wireshark.org/docs/wsug_html_chunked/"><u>Wireshark
+User Guide</u></a> — Official guide for capturing traffic, applying
+display filters, and reading packet details.
+https://www.wireshark.org/docs/wsug_html_chunked/</p>
+<p>• <a href="https://www.wireshark.org/docs/dfref/"><u>Wireshark
+Display Filter Reference</u></a> — Find field names and filter syntax
+for specific protocols. https://www.wireshark.org/docs/dfref/</p>
+<p>• <a href="https://www.tcpdump.org/"><u>tcpdump</u></a> —
+Command-line packet capture tool for Linux and Unix-like systems.
+https://www.tcpdump.org/</p>
+<p>• <a href="https://termshark.io/"><u>Termshark</u></a> — Terminal
+interface for exploring packet captures using tshark.
+https://termshark.io/</p>
+<p>• <a href="https://www.cloudshark.org/"><u>CloudShark</u></a> —
+Browser-based packet capture analysis. Check plan limits and never
+upload sensitive traffic captures. https://www.cloudshark.org/</p>
+</blockquote><h2 id="c-subnetting-binary-and-ip-address-tools">6.4C Subnetting,
+binary, and IP address tools</h2><blockquote>
+<p>• <a href="https://learningnetwork.cisco.com/s/binary-game"><u>Cisco
+Binary Game</u></a> — Short game to build speed converting decimal and
+binary. Free Cisco Learning Network account/sign-in required.
+https://learningnetwork.cisco.com/s/binary-game</p>
+<p>• <a href="https://subnettingpractice.com/"><u>SubnettingPractice.com</u></a>
+— Subnetting questions and timed practice for IPv4 masks, ranges, and
+hosts. https://subnettingpractice.com/</p>
+<p>• <a href="https://www.subnetonline.com/"><u>SubnetOnline</u></a> —
+Browser-based subnet calculators and IP utilities; use to verify your
+own calculation. https://www.subnetonline.com/</p>
+<p>• <a href="https://jodies.de/ipcalc"><u>IPcalc</u></a> — Quick IPv4
+network, mask, range, and broadcast calculation.
+https://jodies.de/ipcalc</p>
+<p>• <a href="https://www.tunnelsup.com/subnet-calculator/"><u>Calculator.net
+IPv6 Subnet Calculator</u></a> — Browser-based IPv6 prefix and range
+calculator. https://www.tunnelsup.com/subnet-calculator/</p>
+<p>• <a href="https://ipv6.he.net/certification/"><u>Hurricane Electric
+IPv6 Certification</u></a> — Optional structured IPv6 tasks and checks,
+useful after IPv4 fundamentals. https://ipv6.he.net/certification/</p>
+</blockquote><h2 id="d-connectivity-ports-performance-and-troubleshooting">6.4D
+Connectivity, ports, performance, and troubleshooting</h2><blockquote>
+<p>• <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/portqry-command-line-port-scanner-v2"><u>Microsoft
+PortQry</u></a> — Check TCP/UDP port status and help diagnose service
+reachability on Windows.
+https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/portqry-command-line-port-scanner-v2</p>
+<p>• <a href="https://learn.microsoft.com/en-us/sysinternals/"><u>Microsoft
+Sysinternals</u></a> — Windows diagnostic utilities; TCPView helps
+inspect active connections.
+https://learn.microsoft.com/en-us/sysinternals/</p>
+<p>• <a href="https://nmap.org/"><u>Nmap</u></a> — Host discovery and
+port/service scanning. Scan only systems and networks you own or are
+explicitly authorised to test. https://nmap.org/</p>
+<p>• <a href="https://iperf.fr/"><u>iPerf3</u></a> — Measure throughput
+between two endpoints you control; useful for separating LAN performance
+from internet speed. https://iperf.fr/</p>
+<p>• <a href="https://www.bitwizard.nl/mtr/"><u>MTR</u></a> — Repeated
+latency and route observations. Some routers filter or deprioritise
+probes, so interpret results carefully.
+https://www.bitwizard.nl/mtr/</p>
+<p>• <a href="https://www.pingplotter.com/"><u>PingPlotter</u></a> —
+Visualise latency and packet-loss observations; features and pricing
+vary by plan. https://www.pingplotter.com/</p>
+<p>• <a href="https://www.speedtest.net/"><u>Speedtest</u></a> — Quick
+internet throughput and latency test; results vary with server and
+network conditions. https://www.speedtest.net/</p>
+<p>• <a href="https://www.advanced-ip-scanner.com/"><u>Advanced IP
+Scanner</u></a> — Windows LAN discovery tool. Use only on networks where
+discovery is authorised. https://www.advanced-ip-scanner.com/</p>
+<p>• <a href="https://angryip.org/"><u>Angry IP Scanner</u></a> —
+Cross-platform IP and port scanner for authorised networks.
+https://angryip.org/</p>
+<p>• <a href="https://curl.se/docs/"><u>curl documentation</u></a> —
+Test HTTP/HTTPS endpoints, inspect response headers, and diagnose
+application-layer connections from a terminal. https://curl.se/docs/</p>
+</blockquote><h2 id="e-dns-domains-and-internet-routing">6.4E DNS, domains, and
+internet routing</h2><blockquote>
+<p>• <a href="https://toolbox.googleapps.com/apps/dig/"><u>Google Admin
+Toolbox Dig</u></a> — Browser-based DNS lookups for common record types.
+https://toolbox.googleapps.com/apps/dig/</p>
+<p>• <a href="https://mxtoolbox.com/SuperTool.aspx"><u>MXToolbox
+SuperTool</u></a> — Quick DNS, MX, SMTP, and domain diagnostics; some
+checks have limits. https://mxtoolbox.com/SuperTool.aspx</p>
+<p>• <a href="https://dnsviz.net/"><u>DNSViz</u></a> — Visual analysis
+of DNS configuration and DNSSEC validation. https://dnsviz.net/</p>
+<p>• <a href="https://dnschecker.org/"><u>DNSChecker</u></a> — Compare
+public DNS answers across locations; useful when checking whether a DNS
+change is visible. https://dnschecker.org/</p>
+<p>• <a href="https://atlas.ripe.net/"><u>RIPE Atlas</u></a> — Explore
+internet measurements from a global probe network; more advanced.
+https://atlas.ripe.net/</p>
+<p>• <a href="https://bgp.tools/"><u>BGP.Tools</u></a> — Explore
+autonomous systems, IP prefixes, and BGP announcements.
+https://bgp.tools/</p>
+<p>• <a href="https://bgp.he.net/"><u>Hurricane Electric BGP
+Toolkit</u></a> — Look up autonomous systems, prefixes, and routing
+information. https://bgp.he.net/</p>
+<p>• <a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml"><u>IANA
+Service Name and Port Registry</u></a> — Authoritative registry for
+service names and registered port numbers.
+https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml</p>
+</blockquote><h2 id="f-diagramming-and-documentation">6.4F Diagramming and
+documentation</h2><blockquote>
+<p>• <a href="https://www.diagrams.net/"><u>diagrams.net</u></a> —
+Create logical/physical network diagrams, topology maps, and rack
+layouts. https://www.diagrams.net/</p>
+<p>• <a href="https://excalidraw.com/"><u>Excalidraw</u></a> — Quick
+sketching for network paths and troubleshooting flows.
+https://excalidraw.com/</p>
+<p>• <a href="https://mermaid.live/"><u>Mermaid Live Editor</u></a> —
+Create flowcharts and sequence diagrams from text; useful for packet
+paths and troubleshooting decisions. https://mermaid.live/</p>
+<p>• <a href="https://netboxlabs.com/oss/netbox/"><u>NetBox</u></a> — IP
+address management and infrastructure documentation platform; more
+useful for a homelab or later-stage projects.
+https://netboxlabs.com/oss/netbox/</p>
+</blockquote><h2 id="g-safe-command-line-and-service-practice">6.4G Safe command-line
+and service practice</h2><blockquote>
+<p>• <a href="https://linuxlab.io/en/p/linux/practice"><u>Linuxlab</u></a> —
+Browser-based Linux command practice; check sign-in and access
+requirements. https://linuxlab.io/en/p/linux/practice</p>
+<p>• <a href="https://www.bashquest.com/"><u>BashQuest</u></a> —
+Simulated command-line tasks to build basic shell familiarity.
+https://www.bashquest.com/</p>
+<p>• <a href="https://shellschool.dev/en"><u>Shellschool</u></a> —
+Simulated Linux and Windows command-line practice without changing your
+local system. https://shellschool.dev/en</p>
+<p>• <a href="https://labs.play-with-docker.com/"><u>Docker
+Playground</u></a> — Browser-based Docker environment when available;
+access requirements may change. https://labs.play-with-docker.com/</p>
+<p>• <a href="https://www.postman.com/"><u>Postman</u></a> — Send HTTP
+requests and inspect responses; helpful for understanding
+application-layer behaviour. https://www.postman.com/</p>
+<p>• <a href="https://gchq.github.io/CyberChef/"><u>CyberChef</u></a> —
+Browser-based tool for encoding, decoding, and transforming text or byte
+data. https://gchq.github.io/CyberChef/</p>
+<p>• <a href="https://www.openssl.org/"><u>OpenSSL</u></a> —
+Command-line tools for inspecting certificates and working with TLS; use
+once comfortable with the terminal. https://www.openssl.org/</p>
+</blockquote><h2 id="h-cloud-networking-visualisers">6.4H Cloud networking
+visualisers</h2><blockquote>
+<p>• <a href="https://sim.shahriarlabs.com/"><u>SimAWS</u></a> — Browser
+simulations for AWS networking concepts such as routes, reachability,
+and security rules. Treat as a learning sandbox, not live AWS
+validation. https://sim.shahriarlabs.com/</p>
+<p>• <a href="https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability-analyzer.html"><u>AWS
+VPC Reachability Analyzer</u></a> — Analyse possible paths between AWS
+resources. Requires an AWS environment; check pricing before using cloud
+services.
+https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability-analyzer.html</p>
+<p>• <a href="https://learn.microsoft.com/en-us/azure/network-watcher/"><u>Azure
+Network Watcher</u></a> — Azure connection troubleshooting, packet
+capture, and network diagnostics; cloud charges may apply.
+https://learn.microsoft.com/en-us/azure/network-watcher/</p>
+<p>• <a href="https://cloud.google.com/network-intelligence-center"><u>Google
+Cloud Network Intelligence Center</u></a> — Visualise and diagnose
+connectivity and performance in a Google Cloud project.
+https://cloud.google.com/network-intelligence-center</p>
+<p>• <a href="https://www.cloudflare.com/learning/"><u>Cloudflare
+Learning Center</u></a> — Clear visual explanations of DNS, HTTP, TLS,
+CDNs, and internet infrastructure.
+https://www.cloudflare.com/learning/</p>
+</blockquote><h2 id="useful-it-communities-and-knowledge-bases">6.5 Useful IT
+communities and knowledge bases</h2><p><strong>Server Fault —</strong> Professional Q&amp;A on system and
+network administration. https://serverfault.com/</p><p><strong>Super User —</strong> Q&amp;A for computer users, operating
+systems, and configuration issues. https://superuser.com/</p><p><strong>Stack Overflow —</strong> Programming and scripting
+questions, including automation around infrastructure.
+https://stackoverflow.com/</p><p><strong>Reddit r/networking —</strong> Networking industry
+discussions and operational perspectives; not authoritative
+documentation. https://www.reddit.com/r/networking/</p><p><strong>Reddit r/ccna —</strong> CCNA study discussions and peer
+advice; verify technical claims. https://www.reddit.com/r/ccna/</p><p><strong>Reddit r/homelab —</strong> Home lab ideas and infrastructure
+experience; verify product/version specifics.
+https://www.reddit.com/r/homelab/</p><p><strong>Spiceworks Community —</strong> IT operations,
+administration, and troubleshooting discussions.
+https://community.spiceworks.com/</p><p><strong>Packet Pushers —</strong> Networking podcasts, articles, and
+industry discussion. https://packetpushers.net/</p><p><strong>The Networking Nerd —</strong> Networking explanations and
+commentary from an industry practitioner.
+https://networkingnerd.net/</p><p><strong>Practical Networking —</strong> Explanations of routing,
+subnetting, and networking concepts.
+https://www.practicalnetworking.net/</p><h2 id="cloud-linux-scripting-and-automation">6.6 Cloud, Linux,
+scripting, and automation</h2><p><strong>Learn Bash —</strong> Bash shell reference and learning
+materials. https://www.gnu.org/software/bash/manual/</p><p><strong>PowerShell documentation —</strong> Official command and
+scripting documentation.
+https://learn.microsoft.com/en-us/powershell/</p><p><strong>Python documentation —</strong> Language tutorial, standard
+library, and reference. https://docs.python.org/3/</p><p><strong>Ansible documentation —</strong> Infrastructure automation,
+inventory, playbooks, and network automation modules.
+https://docs.ansible.com/</p><p><strong>Terraform documentation —</strong> Infrastructure as code for
+cloud and other supported platforms.
+https://developer.hashicorp.com/terraform/docs</p><p><strong>Git documentation —</strong> Version control for scripts,
+configs, notes, and infrastructure code. https://git-scm.com/doc</p><p><strong>Docker documentation —</strong> Containers, networking,
+ports, and service connectivity. https://docs.docker.com/</p><p><strong>Kubernetes networking concepts —</strong> Cluster networking,
+Services, DNS, network policies, and ingress concepts.
+https://kubernetes.io/docs/concepts/cluster-administration/networking/</p><p><strong>Cloudflare Learning Center —</strong> Accessible explanations
+of DNS, CDN, TLS, DDoS, and internet infrastructure.
+https://www.cloudflare.com/learning/</p><p><strong>AWS Well-Architected —</strong> Cloud architecture guidance
+including reliability, security, and operations.
+https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html</p><h2 id="career-job-skills-and-keeping-current">6.7 Career, job skills,
+and keeping current</h2><p><strong>Cisco Learning Network —</strong> Certification community,
+exam preparation discussion, and study resources.
+https://learningnetwork.cisco.com/</p><p><strong>Microsoft Technical Community —</strong> Product
+announcements, technical discussions, and community blogs.
+https://techcommunity.microsoft.com/</p><p><strong>AWS Networking Blog —</strong> Cloud networking
+announcements, architecture, and implementation examples.
+https://aws.amazon.com/blogs/networking-and-content-delivery/</p><p><strong>Cloudflare Blog —</strong> Internet infrastructure, security,
+performance, and protocol developments. https://blog.cloudflare.com/</p><p><strong>SANS Internet Storm Center —</strong> Security observations
+and threat activity useful for security awareness.
+https://isc.sans.edu/</p><p><strong>CISA Secure by Design / alerts —</strong> Security guidance
+and advisories; prioritise applicable official notices.
+https://www.cisa.gov/news-events/cybersecurity-advisories</p><p><strong>Australian Cyber Security Centre —</strong> Australian cyber
+security guidance, alerts, and essential practices.
+https://www.cyber.gov.au/</p><p><strong>Jobs and Skills Australia —</strong> Australian occupation
+and labour-market information. https://www.jobsandskills.gov.au/</p><p><strong>SEEK Australia —</strong> Job listings to compare entry-level
+help desk, NOC, network support, and cloud roles.
+https://www.seek.com.au/</p><p><strong>LinkedIn Learning —</strong> IT courses and career learning;
+access may require payment or library membership.
+https://www.linkedin.com/learning/</p><table><caption>6.7 Career, job skills, and keeping current</caption>
+<colgroup>
+<col style="width: 100%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Resource directory upkeep Links, course availability,
+certification objectives, and free access can change. Prefer current
+official pages. Community answers are useful clues, not a substitute for
+validating configurations against the exact device and software
+version.</strong></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table><section class="supplement" id="supplemental-technical-quick-reference">
+<h1 id="supplement-operational-quick-reference-and-verification-notes">Supplement: Operational quick reference and verification notes</h1>
+<h2 id="ipv6-addressing-and-control-plane-checks">IPv6 addressing and control-plane checks</h2>
+<table><caption>IPv6 addressing and control-plane checks</caption><thead><tr><th>Prefix / mechanism</th><th>Operational meaning</th><th>Checks</th></tr></thead><tbody><tr><td>2000::/3</td><td>Global unicast space</td><td>Validate prefix delegation/assignment, routing, ACLs and return path.</td></tr><tr><td>fe80::/10</td><td>Link-local</td><td>Required for NDP and many local control functions; interface scope matters.</td></tr><tr><td>fc00::/7</td><td>Unique local; locally assigned prefixes commonly use fd00::/8</td><td>Check routing boundaries and policy; not intended for public global routing.</td></tr><tr><td>ff00::/8</td><td>Multicast</td><td>IPv6 uses multicast for essential local control functions; avoid blanket ICMPv6 filtering.</td></tr><tr><td>::/128; ::1/128</td><td>Unspecified; loopback</td><td>Special addresses, not ordinary host interface assignments.</td></tr></tbody></table>
+<p><strong>NDP vs ARP:</strong> ARP maps IPv4 next-hop addresses to link-layer addresses. IPv6 NDP uses ICMPv6 for neighbour discovery and router discovery (NS/NA, RS/RA, Redirect). Inspect link-local addresses, neighbour cache and RA state when IPv6 fails despite an apparently valid global address.</p>
+<p><strong>SLAAC and DHCPv6:</strong> RA communicates prefixes, flags and default-router information; SLAAC forms addresses from advertised prefixes. DHCPv6 may be stateful or provide other configuration, depending on design. A default router is normally learned through RA, not DHCPv6.</p>
+<table><caption>IPv6 addressing and control-plane checks (part 2)</caption><thead><tr><th>Platform</th><th>Read-only diagnostics</th><th>Focus</th></tr></thead><tbody><tr><td>Windows</td><td><code>ipconfig /all</code>; <code>ping -6 &lt;address&gt;</code>; <code>tracert -6 &lt;address&gt;</code>; <code>netsh interface ipv6 show interfaces</code>; <code>Get-NetIPAddress -AddressFamily IPv6</code></td><td>Interface state, prefix, default route, neighbour reachability and source-address choice.</td></tr><tr><td>Linux</td><td><code>ip -6 addr</code>; <code>ip -6 route</code>; <code>ip -6 neigh</code>; <code>ping -6 &lt;address&gt;</code></td><td>RA/SLAAC state, routes, link-local scope, neighbour state and policy.</td></tr><tr><td>macOS</td><td><code>ifconfig</code>; <code>networksetup -listallhardwareports</code>; <code>netstat -rn</code>; <code>scutil --dns</code>; <code>ipconfig getifaddr en0</code> (IPv4; interface varies)</td><td>Map the correct interface; inspect IPv6 routes and resolver scopes.</td></tr></tbody></table>
+<h2 id="wireless-performance-and-authentication">Wireless performance and authentication</h2>
+<ol><li>Establish scope: affected clients, APs, SSIDs, locations, time pattern and recent changes.</li><li>Measure/inspect signal quality, SNR if available, band, channel utilisation, interference, roaming, client capability and AP placement.</li><li>Compare near-AP tests, alternate clients and wired performance; distinguish PHY/radio issues from DHCP, DNS, gateway, proxy, VPN and application issues.</li><li>Correlate client logs and driver/firmware state with AP/controller events. For enterprise authentication, check EAP method, certificate chain/validity/time, identity/policy, RADIUS reachability and server-side rejection logs.</li><li>Apply one approved change at a time, record baseline and define rollback criteria before altering channels, transmit power, security or firmware.</li></ol>
+<p><strong>WPA2-Personal</strong> uses a shared passphrase. <strong>WPA2-Enterprise</strong> uses 802.1X/EAP and typically a central authentication service such as RADIUS. Use supported current security settings (WPA3 where compatible) and the organisation's policy.</p>
+<h2 id="subnetting-for-larger-ipv4-blocks">Subnetting for larger IPv4 blocks</h2>
+<table><caption>Subnetting for larger IPv4 blocks</caption><thead><tr><th>Prefix</th><th>Mask</th><th>Total addresses</th><th>Traditional usable hosts*</th></tr></thead><tbody><tr><td>/16</td><td>255.255.0.0</td><td>65,536</td><td>65,534</td></tr><tr><td>/17</td><td>255.255.128.0</td><td>32,768</td><td>32,766</td></tr><tr><td>/18</td><td>255.255.192.0</td><td>16,384</td><td>16,382</td></tr><tr><td>/19</td><td>255.255.224.0</td><td>8,192</td><td>8,190</td></tr><tr><td>/20</td><td>255.255.240.0</td><td>4,096</td><td>4,094</td></tr><tr><td>/21</td><td>255.255.248.0</td><td>2,048</td><td>2,046</td></tr><tr><td>/22</td><td>255.255.252.0</td><td>1,024</td><td>1,022</td></tr><tr><td>/23</td><td>255.255.254.0</td><td>512</td><td>510</td></tr></tbody></table>
+<p>*For conventional broadcast subnets, usable hosts subtract network and broadcast addresses. /31 point-to-point links are defined by RFC 3021; /32 is a single-address route. The block-size method generalises across prefixes; verify non-trivial plans with independent calculation and address-plan policy.</p>
+<h2 id="smtp-submission-and-physical-media">SMTP submission and physical media</h2>
+<p>TCP 25 is commonly used for server-to-server SMTP relay; TCP 587 is message submission commonly using STARTTLS; TCP 465 is message submission over implicit TLS. Validate the actual mail architecture, policy and service listener rather than inferring service health from a port number alone.</p>
+<table><caption>SMTP submission and physical media</caption><thead><tr><th>Medium</th><th>Common Ethernet reference</th><th>Distance caveat</th></tr></thead><tbody><tr><td>Cat5e</td><td>1 Gb/s to 100 m</td><td>Compliant channel and installation required.</td></tr><tr><td>Cat6</td><td>1 Gb/s to 100 m; 10 Gb/s over shorter channels</td><td>10GBASE-T is often cited up to 55 m under qualifying conditions; crosstalk and installation matter.</td></tr><tr><td>Cat6A</td><td>10 Gb/s to 100 m</td><td>Verify channel components and standards compliance.</td></tr><tr><td>OM3 multimode</td><td>10GBASE-SR typically up to 300 m</td><td>Optics and fibre grade determine reach.</td></tr><tr><td>OM4 multimode</td><td>10GBASE-SR typically up to 400 m</td><td>Confirm transceiver specification, wavelength, connectors and link budget.</td></tr></tbody></table>
+<h2 id="escalation-and-evidence-handover">Escalation and evidence handover</h2>
+<p>Escalate for broad/increasing impact, suspected security events, shared infrastructure or upstream faults, recurring production incidents, required privileged access or an unapproved change, unclear rollback, or when the next step exceeds the agreed diagnostic boundary. Include scope/impact, start time, recent changes, topology and relevant VLAN/subnet, exact commands/output, tests and findings, exclusions, monitoring/log evidence and rollback status.</p>
+<h2 id="selected-technical-references">Selected technical references</h2>
+<ul><li>IANA IPv6 Address Space: <a href="https://www.iana.org/assignments/ipv6-address-space/ipv6-address-space.xhtml" rel="noopener noreferrer">https://www.iana.org/assignments/ipv6-address-space/ipv6-address-space.xhtml</a></li><li>RFC 4861, IPv6 Neighbor Discovery: <a href="https://www.rfc-editor.org/rfc/rfc4861" rel="noopener noreferrer">https://www.rfc-editor.org/rfc/rfc4861</a></li><li>RFC 4862, IPv6 Stateless Address Autoconfiguration: <a href="https://www.rfc-editor.org/rfc/rfc4862" rel="noopener noreferrer">https://www.rfc-editor.org/rfc/rfc4862</a></li><li>RFC 9915, DHCP for IPv6 (obsoletes RFC 8415): <a href="https://www.rfc-editor.org/rfc/rfc9915.html" rel="noopener noreferrer">https://www.rfc-editor.org/rfc/rfc9915.html</a></li><li>IANA Service Name and Port Number Registry: <a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml" rel="noopener noreferrer">https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml</a></li><li>RFC 6409, Message Submission: <a href="https://www.rfc-editor.org/rfc/rfc6409" rel="noopener noreferrer">https://www.rfc-editor.org/rfc/rfc6409</a></li><li>RFC 8314, Cleartext Considered Obsolete: <a href="https://www.rfc-editor.org/rfc/rfc8314" rel="noopener noreferrer">https://www.rfc-editor.org/rfc/rfc8314</a></li><li>Microsoft wireless troubleshooting: <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/wireless-network-connectivity-issues-troubleshooting" rel="noopener noreferrer">https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/wireless-network-connectivity-issues-troubleshooting</a></li><li>Microsoft WPA2-Enterprise / 802.1X guidance: <a href="https://learn.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/wireless/a-deploy-8021X-wireless-access" rel="noopener noreferrer">https://learn.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/wireless/a-deploy-8021X-wireless-access</a></li><li>Cisco transceiver/cabling specifications: <a href="https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/data_sheet_c78-455693.html" rel="noopener noreferrer">https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/data_sheet_c78-455693.html</a></li><li>Cisco 200-301 CCNA v2.0 exam topics — <a href="https://learningcontent.cisco.com/documents/marketing/exam-topics/200-301_CCNA_v2.0_Exam_Topics_PDF.pdf" rel="noopener noreferrer">Official exam topics PDF</a></li></ul>
+</section><h1 id="reference-maintenance-and-study-workflow">7. Reference
+maintenance and study workflow</h1><h2 id="quality-rules-for-this-reference">Quality rules for this
+reference</h2><blockquote>
+<p>• Prefer official vendor documentation and published standards for
+commands, defaults, and protocol behaviour.</p>
+<p>• Label vendor-specific behaviour rather than presenting it as
+universal networking law.</p>
+<p>• Keep one main idea per section and put exceptions next to the rule
+they qualify.</p>
+<p>• Avoid copying secrets into inventories: passwords, private keys,
+tokens, and sensitive configs should not be stored in ordinary
+notes.</p>
+<p>• Use authorised systems only for scanning, packet capture, and
+connectivity testing.</p>
+<p>• When a command changes state, mark it clearly and explain the risk
+before use.</p>
+</blockquote><section class="edition-module" id="advanced-scenario-lab"><h1 id="7-advanced-edition-scenario-and-verification-lab">7. Advanced edition: scenario and verification lab</h1>
+<p class="module-intro">This section assumes familiarity with IP addressing, VLANs, routing and basic command-line diagnostics. Use the command sets as verification patterns, not as universal syntax. Configuration snippets are for a controlled lab only and should not be pasted into production without design review, approval and rollback planning.</p>
+<h2 id="71-ccna-blueprint-timing-avoid-studying-the-wrong-version">7.1 CCNA blueprint timing: avoid studying the wrong version</h2>
+<p>Cisco's published schedule states that the 200-301 CCNA v1.1 exam remains available through <strong>2 February 2027</strong>; the v2.0 exam begins <strong>3 February 2027</strong>. This edition includes a v2.0-oriented coverage map as forward-looking preparation, not a claim that v2.0 is already the active exam on the review date. Candidates should check Cisco's current exam page and use the blueprint matching their booked exam date.</p>
+<p><a href="https://www.cisco.com/web/go/ccna/">Cisco CCNA official page</a> · <a href="https://learningcontent.cisco.com/documents/marketing/exam-topics/200-301_CCNA_v2.0_Exam_Topics_PDF.pdf">Cisco 200-301 CCNA v2.0 exam topics (PDF)</a></p>
+<h2 id="72-verification-command-sets-by-failure-domain">7.2 Verification command sets by failure domain</h2>
+<table><caption>7.2 Verification command sets by failure domain</caption><thead><tr><th>Domain</th><th>Read-only checks</th><th>Interpretation / follow-up</th></tr></thead><tbody>
+<tr><td>Physical and L2</td><td><code>show interfaces status</code>; <code>show interfaces counters errors</code>; <code>show vlan brief</code>; <code>show interfaces trunk</code></td><td>Look for down state, errors, speed/duplex mismatch, wrong access VLAN, missing allowed VLAN or native VLAN mismatch. Exact command support varies.</td></tr>
+<tr><td>SVI and routing</td><td><code>show ip interface brief</code>; <code>show ip route</code>; <code>show ip protocols</code>; <code>show arp</code></td><td>Confirm interface operational state, longest-prefix route, next hop and adjacency. A route in the table does not prove the full path or return path.</td></tr>
+<tr><td>IPv6</td><td><code>show ipv6 interface brief</code>; <code>show ipv6 route</code>; <code>show ipv6 neighbors</code></td><td>Check link-local/global address, RA/default route, neighbour resolution and ICMPv6 policy. Syntax varies by platform.</td></tr>
+<tr><td>Control plane / operations</td><td><code>show logging</code>; <code>show processes cpu</code>; <code>show etherchannel summary</code></td><td>Correlate timestamps with events; avoid treating a single CPU sample or log line as a complete diagnosis.</td></tr></tbody></table>
+<h2 id="73-routing-case-route-exists-traffic-still-fails">7.3 Routing case: route exists, traffic still fails</h2>
+<p>Scenario: a branch router has a route to <code>10.40.8.0/24</code>, but clients cannot reach the application. Check the route's source, next hop and administrative/metric selection; verify next-hop reachability and ARP/ND; confirm the egress interface and policy; then validate the return route from the destination network. Test the exact transport and port, not just ICMP. Consider asymmetric routing, stateful firewall expectations, NAT, MTU/PMTUD and application-layer TLS/authentication only where evidence points there.</p>
+<p><strong>Reasoning rule:</strong> routing-table presence means a forwarding decision can be selected for a destination prefix; it does not prove that the next hop is alive, that packets traverse policy, that the return path exists, or that the application responds.</p>
+<h2 id="74-acl-and-firewall-reasoning">7.4 ACL and firewall reasoning</h2>
+<ul><li>Write a flow tuple before editing policy: source, destination, protocol, source/destination port, direction, interface/zone and expected state.</li><li>Check rule order, implicit deny, object groups, address translation order, established/return traffic, logging and hit counters.</li><li>Evaluate both forward and return paths. A rule that permits one direction may not satisfy stateful inspection or routing requirements.</li><li>Prefer a narrow, time-bounded rule with an owner and rollback plan over broad “permit any” troubleshooting changes.</li><li>Confirm the application actually listens on the target address/port and inspect service logs; a network policy may not be the fault.</li></ul>
+<h2 id="75-ospf-and-neighbour-failure-checklist">7.5 OSPF and neighbour failure checklist</h2>
+<p>When an OSPF adjacency is absent or unstable, compare area, network type, timers, authentication, subnet/mask, MTU, router IDs, passive-interface settings and reachability of the directly connected peers. Inspect logs and neighbour state before clearing processes or changing timers. An adjacency state alone does not guarantee that the required prefixes are advertised, accepted, installed and selected.</p>
+<h2 id="76-etherchannel-and-trunk-scenario">7.6 EtherChannel and trunk scenario</h2>
+<p>One member link forwards but the bundle is degraded. Check that both ends agree on channel protocol and member settings, speed/duplex, trunk/access mode, allowed VLANs, native VLAN, and Layer 2/Layer 3 mode. Verify that members are actually bundled rather than suspended or individual. Do not remove members or renegotiate a production bundle without an approved change plan.</p>
+<h2 id="77-ipv6-fault-isolation">7.7 IPv6 fault isolation</h2>
+<ol><li>Confirm the interface has the expected link-local address and any intended global/ULA address.</li><li>Inspect Router Advertisements, prefix flags, default route and the expected SLAAC/DHCPv6 design.</li><li>Check the neighbour cache and ICMPv6 messages; do not apply an IPv4-only troubleshooting model.</li><li>Test DNS AAAA and A answers separately, and determine which address family the application actually selected.</li><li>Review firewall rules, routing and return path for IPv6 independently of IPv4.</li></ol>
+<h2 id="78-automation-and-change-safety">7.8 Automation and change safety</h2>
+<p>For scripts or Ansible, define inventory scope explicitly, start with read-only facts/show commands, protect credentials in an approved secrets mechanism, capture before/after state, use version control, and test on a lab or small canary set. Add timeouts and failure handling; do not assume a command is idempotent merely because it is automated. Keep secrets and sensitive configurations out of public repositories.</p>
+<h2 id="79-advanced-incident-record">7.9 Advanced incident record</h2>
+<table><caption>7.9 Advanced incident record</caption><tbody><tr><th>Impact / scope</th><td>Sites, VLANs, users, services and severity</td></tr><tr><th>Timeline</th><td>First observed, last known good, change/event timestamps with timezone</td></tr><tr><th>Flow under test</th><td>Source / destination / protocol / ports / address family</td></tr><tr><th>Evidence</th><td>Routing/adjacency state, interface counters, logs, approved captures, test outputs</td></tr><tr><th>Hypotheses</th><td>Ranked by evidence; identify what would disprove each one</td></tr><tr><th>Change control</th><td>Approver, risk, implementation steps, verification and rollback</td></tr><tr><th>Handover</th><td>Current state, next owner, next test and customer update due time</td></tr></tbody></table>
+<h2 id="710-escalate-before-a-risky-intervention">7.10 Escalate before a risky intervention</h2>
+<p>Escalate suspected compromise, broad outages, routing instability, possible data exposure, changes affecting shared infrastructure, unknown production dependencies, or work requiring privileges/maintenance windows outside your authority. Preserve evidence and avoid “fixes” that destroy logs or conceal the timeline.</p>
+</section><section class="flow-figure-section" id="diagnostic-flow"><h1 id="network-troubleshooting-flow">Network troubleshooting flow</h1><p>Follow the path from the simplest local checks toward routing, name resolution and application service. Use the failed branch to choose the next investigation, not to make an unsupported conclusion.</p><figure aria-labelledby="diagnostic-flow-caption" class="flow-figure">
+<svg aria-labelledby="flowtitle flowdesc" role="img" viewBox="0 0 920 760" xmlns="http://www.w3.org/2000/svg">
+<title id="flowtitle">Network troubleshooting decision flow</title><desc id="flowdesc">Start by defining the symptom and scope. Check physical or wireless link, then IP configuration, gateway reachability, remote IP reachability, DNS, and the application port. At each failed check, investigate that layer, record evidence, retest, and escalate when impact or risk warrants it.</desc>
+<defs><marker id="arrow" markerheight="10" markerwidth="10" orient="auto" refx="8" refy="3"><path d="M0,0 L0,6 L9,3 z" fill="#42627a"></path></marker></defs>
+<g font-family="Arial, sans-serif" font-size="16" stroke-width="2" text-anchor="middle">
+<rect fill="#e7f2f6" height="52" rx="22" stroke="#17677c" width="260" x="330" y="18"></rect><text fill="#17324d" font-weight="bold" stroke="none" x="460" y="49">Define symptom and scope</text>
+<path d="M460 70 V100" fill="none" marker-end="url(#arrow)" stroke="#42627a"></path>
+<rect fill="#f5f8fa" height="58" rx="8" stroke="#42627a" width="320" x="300" y="105"></rect><text fill="#17324d" stroke="none" x="460" y="129">Physical link / Wi-Fi association</text><text fill="#17324d" font-size="13" stroke="none" x="460" y="149">Link light, SSID, signal, interface state</text>
+<path d="M460 163 V193" fill="none" marker-end="url(#arrow)" stroke="#42627a"></path><rect fill="#f5f8fa" height="58" rx="8" stroke="#42627a" width="320" x="300" y="198"></rect><text fill="#17324d" stroke="none" x="460" y="222">IP configuration valid?</text><text fill="#17324d" font-size="13" stroke="none" x="460" y="242">Address, prefix/mask, gateway, DNS</text>
+<path d="M460 256 V286" fill="none" marker-end="url(#arrow)" stroke="#42627a"></path><rect fill="#f5f8fa" height="54" rx="8" stroke="#42627a" width="320" x="300" y="291"></rect><text fill="#17324d" stroke="none" x="460" y="323">Can reach default gateway?</text>
+<path d="M460 345 V375" fill="none" marker-end="url(#arrow)" stroke="#42627a"></path><rect fill="#f5f8fa" height="54" rx="8" stroke="#42627a" width="320" x="300" y="380"></rect><text fill="#17324d" stroke="none" x="460" y="412">Can reach remote IP?</text>
+<path d="M460 434 V464" fill="none" marker-end="url(#arrow)" stroke="#42627a"></path><rect fill="#f5f8fa" height="54" rx="8" stroke="#42627a" width="320" x="300" y="469"></rect><text fill="#17324d" stroke="none" x="460" y="501">Does name resolution work?</text>
+<path d="M460 523 V553" fill="none" marker-end="url(#arrow)" stroke="#42627a"></path><rect fill="#f5f8fa" height="54" rx="8" stroke="#42627a" width="320" x="300" y="558"></rect><text fill="#17324d" stroke="none" x="460" y="590">Does required app port/service work?</text>
+<path d="M460 612 V642" fill="none" marker-end="url(#arrow)" stroke="#42627a"></path><rect fill="#e5f3e8" height="52" rx="22" stroke="#3a7950" width="260" x="330" y="647"></rect><text fill="#204c30" font-weight="bold" stroke="none" x="460" y="678">Record result and close / monitor</text>
+<!-- failed checks -->
+<g fill="#fff2df" stroke="#b77819"><rect height="48" rx="7" width="225" x="18" y="112"></rect><rect height="48" rx="7" width="225" x="18" y="203"></rect><rect height="48" rx="7" width="225" x="18" y="294"></rect><rect height="48" rx="7" width="225" x="18" y="383"></rect><rect height="48" rx="7" width="225" x="18" y="472"></rect><rect height="48" rx="7" width="225" x="18" y="561"></rect></g>
+<g fill="#6b4810" font-size="14" stroke="none"><text x="130" y="132">No link / association</text><text x="130" y="149">Check cable, radio, port</text><text x="130" y="223">Bad / missing IP settings</text><text x="130" y="240">Check DHCP or static config</text><text x="130" y="314">Gateway fails</text><text x="130" y="331">Local VLAN / link / gateway</text><text x="130" y="403">Remote IP fails</text><text x="130" y="420">Route / ACL / upstream path</text><text x="130" y="492">Name fails, IP works</text><text x="130" y="509">DNS / suffix / resolver</text><text x="130" y="581">Port fails</text><text x="130" y="598">Service / firewall / listener</text></g>
+<g fill="none" marker-end="url(#arrow)" stroke="#b77819"><path d="M300 134 H245"></path><path d="M300 227 H245"></path><path d="M300 318 H245"></path><path d="M300 407 H245"></path><path d="M300 496 H245"></path><path d="M300 585 H245"></path></g>
+<rect fill="#f0edf8" height="160" rx="8" stroke="#7561a8" width="230" x="670" y="260"></rect><g fill="#44356f" font-size="14" stroke="none"><text font-weight="bold" x="785" y="285">At every step</text><text x="785" y="310">• Capture evidence</text><text x="785" y="333">• Change one thing</text><text x="785" y="356">• Retest the same symptom</text><text x="785" y="379">• Record before / after</text><text x="785" y="402">• Escalate if risky or broad</text></g>
+<path d="M620 318 H650 V340 H670" fill="none" marker-end="url(#arrow)" stroke="#7561a8" stroke-dasharray="5 4"></path>
+</g></svg><figcaption id="diagnostic-flow-caption">Use this as a sequence, not a guarantee: ICMP may be blocked, a host may use IPv6, and application failures can occur even when lower layers work. Compare known-good devices and paths. Stop before disruptive changes unless authorised.</figcaption></figure></section><p>End of reference</p></main>
+<nav id="TOC" role="doc-toc">
+<p class="contents-label">Contents</p>
+<ul><li><a href="#choose-the-right-depth">Choose the right depth</a></li><li><a href="#how-to-use-this-reference">How to use this reference</a></li><li><a href="#daily-use-quick-reference">Daily-use quick reference</a></li><li><a href="#quick-reference-cheat-sheets">1. Quick-reference cheat
+sheets</a><li><a href="#network-devices-and-their-jobs">1.1 Network devices and their
+jobs</a></li><li><a href="#osi-model-at-a-glance">1.2 OSI model at a glance</a></li><li><a href="#tcpip-model">1.3 TCP/IP model</a></li><li><a href="#common-protocols-and-systems">1.4 Common protocols and
+systems</a></li><li><a href="#common-ports">1.5 Common ports</a></li><li><a href="#ipv4-subnetting-pocket-reference">1.6 IPv4 subnetting pocket
+reference</a></li><li><a href="#private-ipv4-ranges-and-special-addresses">1.7 Private IPv4
+ranges and special addresses</a></li><li><a href="#vlan-and-trunk-reminders">1.8 VLAN and trunk reminders</a></li><li><a href="#routing-reminders">1.9 Routing reminders</a></li><li><a href="#wi-fi-essentials">1.10 Wi-Fi essentials</a></li></li><li><a href="#troubleshooting-playbooks">2. Troubleshooting playbooks</a><li><a href="#one-device-has-no-connectivity">2.1 One device has no
+connectivity</a></li><li><a href="#wi-fi-connected-but-internet-unavailable">2.2 Wi-Fi connected
+but internet unavailable</a></li><li><a href="#dhcp-or-wrong-ip-configuration">2.3 DHCP or wrong IP
+configuration</a></li><li><a href="#website-fails-by-name">2.4 Website fails by name</a></li><li><a href="#slow-or-intermittent-network">2.5 Slow or intermittent
+network</a></li><li><a href="#vlan-or-trunk-issue">2.6 VLAN or trunk issue</a></li><li><a href="#local-network-works-remote-networks-fail">2.7 Local network
+works; remote networks fail</a></li><li><a href="#a-service-port-appears-unreachable">2.8 A service port appears
+unreachable</a></li><li><a href="#symptom-to-next-check-decision-table">2.9 Symptom-to-next-check
+decision table</a></li><li><a href="#worked-troubleshooting-examples-and-self-check">2.10 Worked
+troubleshooting examples and self-check</a></li></li><li><a href="#practical-tools-and-templates">3. Practical tools and
+templates</a><li><a href="#command-reference-windows">3.1 Command reference: Windows</a></li><li><a href="#command-reference-linux">3.2 Command reference: Linux</a></li><li><a href="#cisco-ios-ios-xe-read-only-checks">3.3 Cisco IOS / IOS XE
+read-only checks</a></li><li><a href="#ip-addressing-plan-template">3.4 IP addressing plan
+template</a></li><li><a href="#network-inventory-template">3.5 Network inventory template</a></li><li><a href="#configuration-review-checklists">3.6 Configuration review
+checklists</a></li><li><a href="#change-record-template">3.7 Change record template</a></li><li><a href="#subnet-calculator-logic">3.8 Subnet calculator logic</a></li></li><li><a href="#concept-and-protocol-reference">4. Concept and protocol
+reference</a><li><a href="#ip-addressing-and-subnetting">IP addressing and subnetting</a></li><li><a href="#ethernet-switching">Ethernet switching</a></li><li><a href="#routing">Routing</a></li><li><a href="#arp-and-ipv6-ndp">ARP and IPv6 NDP</a></li><li><a href="#tcp-and-udp">TCP and UDP</a></li><li><a href="#vlans-and-trunks">VLANs and trunks</a></li><li><a href="#natpat">NAT/PAT</a></li><li><a href="#firewalls-and-acls">Firewalls and ACLs</a></li><li><a href="#vpn">VPN</a></li><li><a href="#network-monitoring">Network monitoring</a></li><li><a href="#cloud-vpcvnet">Cloud VPC/VNet</a></li><li><a href="#tls-and-certificates">TLS and certificates</a></li><li><a href="#redundancy-and-loops">Redundancy and loops</a></li><li><a href="#worked-example-how-a-host-reaches-a-website">Worked example: how
+a host reaches a website</a></li></li><li><a href="#advanced-and-ccna-focused-reference">5. Advanced and
+CCNA-focused reference</a><li><a href="#spanning-tree-protocol-stprstp">5.1 Spanning Tree Protocol
+(STP/RSTP)</a></li><li><a href="#etherchannel-and-link-aggregation">5.2 EtherChannel and link
+aggregation</a></li><li><a href="#routing-decisions-and-ospf-fundamentals">5.3 Routing decisions
+and OSPF fundamentals</a></li><li><a href="#ipv6-addressing-and-neighbour-discovery">5.4 IPv6 addressing and
+neighbour discovery</a></li><li><a href="#acls-natpat-and-device-security">5.5 ACLs, NAT/PAT, and device
+security</a></li><li><a href="#first-hop-redundancy-and-resilient-design">5.6 First-hop
+redundancy and resilient design</a></li><li><a href="#wireless-network-access-and-automation">5.7 Wireless, network
+access, and automation</a></li><li><a href="#ccna-style-troubleshooting-command-map">5.8 CCNA-style
+troubleshooting command map</a></li><li><a href="#infrastructure-connectivity-device-discovery-and-physical-media">5.9
+Infrastructure connectivity, device discovery, and physical media</a></li><li><a href="#network-services-management-and-layer-2-security">5.10 Network
+services, management, and Layer 2 security</a></li><li><a href="#ai-assisted-operations-and-ccna-v2.0-coverage-map">5.11
+AI-assisted operations and CCNA v2.0 coverage map</a></li></li><li><a href="#trusted-learning-and-tool-directory">6. Trusted learning and
+tool directory</a><li><a href="#structured-learning-and-certification">6.1 Structured learning
+and certification</a></li><li><a href="#vendor-documentation-and-technical-references">6.2 Vendor
+documentation and technical references</a></li><li><a href="#standards-protocols-and-registries">6.3 Standards, protocols,
+and registries</a></li><li><a href="#simulators-packet-analysis-and-diagnostic-tools">6.4 Simulators,
+packet analysis, and diagnostic tools</a></li><li><a href="#quick-tool-finder-choose-by-task">Quick tool finder: choose by
+task</a></li><li><a href="#a-network-simulators-and-virtual-labs">6.4A Network simulators
+and virtual labs</a></li><li><a href="#b-packet-capture-and-protocol-inspection">6.4B Packet capture
+and protocol inspection</a></li><li><a href="#c-subnetting-binary-and-ip-address-tools">6.4C Subnetting,
+binary, and IP address tools</a></li><li><a href="#d-connectivity-ports-performance-and-troubleshooting">6.4D
+Connectivity, ports, performance, and troubleshooting</a></li><li><a href="#e-dns-domains-and-internet-routing">6.4E DNS, domains, and
+internet routing</a></li><li><a href="#f-diagramming-and-documentation">6.4F Diagramming and
+documentation</a></li><li><a href="#g-safe-command-line-and-service-practice">6.4G Safe command-line
+and service practice</a></li><li><a href="#h-cloud-networking-visualisers">6.4H Cloud networking
+visualisers</a></li><li><a href="#useful-it-communities-and-knowledge-bases">6.5 Useful IT
+communities and knowledge bases</a></li><li><a href="#cloud-linux-scripting-and-automation">6.6 Cloud, Linux,
+scripting, and automation</a></li><li><a href="#career-job-skills-and-keeping-current">6.7 Career, job skills,
+and keeping current</a></li></li><li><a href="#supplement-operational-quick-reference-and-verification-notes">Supplement: Operational quick reference and verification notes</a><li><a href="#ipv6-addressing-and-control-plane-checks">IPv6 addressing and control-plane checks</a></li><li><a href="#wireless-performance-and-authentication">Wireless performance and authentication</a></li><li><a href="#subnetting-for-larger-ipv4-blocks">Subnetting for larger IPv4 blocks</a></li><li><a href="#smtp-submission-and-physical-media">SMTP submission and physical media</a></li><li><a href="#escalation-and-evidence-handover">Escalation and evidence handover</a></li><li><a href="#selected-technical-references">Selected technical references</a></li></li><li><a href="#reference-maintenance-and-study-workflow">7. Reference
+maintenance and study workflow</a><li><a href="#quality-rules-for-this-reference">Quality rules for this
+reference</a></li></li><li><a href="#7-advanced-edition-scenario-and-verification-lab">7. Advanced edition: scenario and verification lab</a><li><a href="#71-ccna-blueprint-timing-avoid-studying-the-wrong-version">7.1 CCNA blueprint timing: avoid studying the wrong version</a></li><li><a href="#72-verification-command-sets-by-failure-domain">7.2 Verification command sets by failure domain</a></li><li><a href="#73-routing-case-route-exists-traffic-still-fails">7.3 Routing case: route exists, traffic still fails</a></li><li><a href="#74-acl-and-firewall-reasoning">7.4 ACL and firewall reasoning</a></li><li><a href="#75-ospf-and-neighbour-failure-checklist">7.5 OSPF and neighbour failure checklist</a></li><li><a href="#76-etherchannel-and-trunk-scenario">7.6 EtherChannel and trunk scenario</a></li><li><a href="#77-ipv6-fault-isolation">7.7 IPv6 fault isolation</a></li><li><a href="#78-automation-and-change-safety">7.8 Automation and change safety</a></li><li><a href="#79-advanced-incident-record">7.9 Advanced incident record</a></li><li><a href="#710-escalate-before-a-risky-intervention">7.10 Escalate before a risky intervention</a></li></li><li><a href="#network-troubleshooting-flow">Network troubleshooting flow</a></li></ul>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="docfoot"><p>This document was developed with assistance from AI tools for drafting, organisation and refinement, and reviewed by the author against their own networking knowledge and learning. Verify platform-specific syntax and current vendor guidance before making changes. Use only on systems you are authorised to inspect or administer.</p><p><strong>Networking Reference &amp; Tools · Release 1.3</strong> · Last reviewed 12 October 2026 · Educational reference only.</p></footer></body>
+</html>
